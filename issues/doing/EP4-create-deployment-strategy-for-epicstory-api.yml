@@ -4,3 +4,9 @@ createdBy: omateusmento@gmail.com
 startedAt: 2024-04-18 13:22
 description: >
   Create initial deployment strategy for epicstory api using terraform, AWS ECS instances and docker
+comments:
+  - createdAt: 2024-04-18 14:02
+    createdBy: omateusmento@gmail.com
+    content: >
+      I'm having some issues with regards to build a docker image for epicstory api. I'm getting an
+      error and executing `npm ci` command in the Dockerfile.
