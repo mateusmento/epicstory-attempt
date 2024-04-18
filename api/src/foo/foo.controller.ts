@@ -1,8 +1,9 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { FindFoos } from './queries/find-foos.query';
 import { CreateFoo } from './commands/create-foo.command';
+import { IncrementFoo } from './commands/increment-foo.comment';
 import { Foo } from './foo.entity';
+import { FindFoos } from './queries/find-foos.query';
 
 @Controller('foos')
 export class FooController {
@@ -19,5 +20,10 @@ export class FooController {
   @Post()
   createFoo(): Promise<Foo> {
     return this.commandBus.execute(new CreateFoo());
+  }
+
+  @Post(':id/increment')
+  incrementFoo(@Param('id') id: number) {
+    return this.commandBus.execute(new IncrementFoo({ id }));
   }
 }

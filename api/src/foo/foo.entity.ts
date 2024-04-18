@@ -12,4 +12,8 @@ export class Foo {
   static create() {
     return create(Foo, { counter: 0 });
   }
+
+  increment() {
+    this.counter++;
+  }
 }

@@ -24,4 +24,17 @@ describe('FooController', () => {
     expect(foo.counter).toBe(0);
     expect(await fooController.getFoos()).toHaveLength(1);
   });
+
+  it('should increment a foo', async () => {
+    {
+      const { id } = await fooController.createFoo();
+      const foo = await fooController.incrementFoo(id);
+      expect(foo.counter).toBe(1);
+    }
+
+    {
+      const [foo] = await fooController.getFoos();
+      expect(foo?.counter).toBe(1);
+    }
+  });
 });
