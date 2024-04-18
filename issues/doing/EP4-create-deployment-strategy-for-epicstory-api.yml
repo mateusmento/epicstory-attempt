@@ -10,3 +10,11 @@ comments:
     content: >
       I'm having some issues with regards to build a docker image for epicstory api. I'm getting an
       error and executing `npm ci` command in the Dockerfile.
+  - createdAt: 2024-04-18 15:33
+    createdBy: omateusmento@gmail.com
+    content: >
+      I was able to fix the problem in the previous comment by add command in Dockerfile to install
+      python3 and other dependencies
+      ```Dockerfile
+      RUN apt-get update -y && apt-get install python3 make g++ -y
+      ```
