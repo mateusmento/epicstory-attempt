@@ -18,3 +18,10 @@ comments:
       ```Dockerfile
       RUN apt-get update -y && apt-get install python3 make g++ -y
       ```
+  - createdAt: 2024-04-18 15:35
+    createdBy: omateusmento@gmail.com
+    content: >
+      Now I'm having a problem when running a script to build and run a docker image on ec2 instance.
+      It seems to be cloning the repository and installing docker but the image is being built.
+      I ssh into the instance and check that no image is built. Needs some investigation.
+      Some error occurs in the ec2 user data script and I can't even see it.
