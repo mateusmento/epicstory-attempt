@@ -28,3 +28,11 @@ comments:
     content: >
       - Setup nestjs cqrs module
       I believe this is a good stepstone for the setup of epicstory api and start implementing features.
+  - author:
+      email: omateusmento@gmail.com
+    createdAt: 2024-04-18 12:30
+    content: >
+      - Include create and patch utility functions
+      - Added jest alias for src folder to make tests work properly
+      - Refactor app module using factory function to allow tests to customize data source options
+      - Added foo module to demonstrate the use of this project setup
