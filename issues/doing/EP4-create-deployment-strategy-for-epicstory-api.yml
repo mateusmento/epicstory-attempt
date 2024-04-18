@@ -25,3 +25,8 @@ comments:
       It seems to be cloning the repository and installing docker but the image is being built.
       I ssh into the instance and check that no image is built. Needs some investigation.
       Some error occurs in the ec2 user data script and I can't even see it.
+  - createdAt: 2024-04-18 15:55
+    createdBy: omateusmento@gmail.com
+    content: >
+      Another comment on the strategy I'm using is that the docker image is built and store inside a
+      ec2 instance. Another option would be to build it in a CI/CD pipeline and push it to a repository.
