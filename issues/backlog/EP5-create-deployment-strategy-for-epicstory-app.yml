@@ -1,0 +1,5 @@
+title: Create deployment strategy for epicstory app
+createdAt: 2024-04-18 13:05
+createdBy: omateusmento@gmail.com
+description: >
+  Create initial deployment strategy for epicstory app using terraform, AWS ECS instances and docker
