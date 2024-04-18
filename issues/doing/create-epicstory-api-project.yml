@@ -9,3 +9,9 @@ comments:
       email: omateusmento@gmail.com
     content: >
       Created an empty nestjs application including editorconfig and vscode settings
+  - author:
+      email: omateusmento@gmail.com
+    content: >
+      - Used global validation pipe with class-validator and class-transformer
+      - Used typed configuration with nest-typed-config
+      - Defined configuration for port api listening to
