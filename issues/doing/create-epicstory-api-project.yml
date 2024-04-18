@@ -7,10 +7,12 @@ description: >
 comments:
   - author:
       email: omateusmento@gmail.com
+    createdAt: 2024-04-18 11:25
     content: >
       Created an empty nestjs application including editorconfig and vscode settings
   - author:
       email: omateusmento@gmail.com
+    createdAt: 2024-04-18 11:37
     content: >
       - Used global validation pipe with class-validator and class-transformer
       - Used typed configuration with nest-typed-config
