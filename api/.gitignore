@@ -59,3 +59,12 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 /epicstory
 /epicstory-shm
 /epicstory-wal
+
+# terraform files
+
+/deploy/.terraform
+/deploy/.terraform.lock.hcl
+/deploy/terraform.tfstate
+/deploy/terraform.tfstate.backup
+/deploy/aws-epicstory.pem
+/deploy/aws-epicstory.pem.pub
