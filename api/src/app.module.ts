@@ -3,27 +3,41 @@ import { TypedConfigModule, dotenvLoader } from 'nest-typed-config';
 import { AppConfig } from './app.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CqrsModule } from '@nestjs/cqrs';
+import { FooModule } from './foo/foo.module';
+import { DataSourceOptions } from 'typeorm';
+import { patch } from './lib/objects';
 
-@Module({
-  imports: [
-    TypedConfigModule.forRoot({
-      isGlobal: true,
-      schema: AppConfig,
-      load: dotenvLoader({ expandVariables: true }),
-    }),
-    TypeOrmModule.forRootAsync({
-      inject: [AppConfig],
-      useFactory: async (config: AppConfig) => ({
-        type: 'better-sqlite3',
-        database: config.DATABASE_NAME,
-        enableWAL: true,
-        synchronize: true,
-        autoLoadEntities: true,
-        logging: true,
-        logger: 'advanced-console',
+export function createAppModule(
+  dataSourceOptions: Partial<DataSourceOptions> = {},
+) {
+  @Module({
+    imports: [
+      TypedConfigModule.forRoot({
+        isGlobal: true,
+        schema: AppConfig,
+        load: dotenvLoader({ expandVariables: true }),
       }),
-    }),
-    CqrsModule.forRoot(),
-  ],
-})
-export class AppModule {}
+      TypeOrmModule.forRootAsync({
+        inject: [AppConfig],
+        useFactory: async (config: AppConfig) =>
+          patch(
+            {
+              type: 'better-sqlite3',
+              database: config.DATABASE_NAME,
+              enableWAL: true,
+              synchronize: true,
+              autoLoadEntities: true,
+              logging: true,
+              logger: 'advanced-console',
+            } as DataSourceOptions,
+            dataSourceOptions,
+          ),
+      }),
+      CqrsModule.forRoot(),
+      FooModule,
+    ],
+  })
+  class AppModule {}
+
+  return AppModule;
+}
