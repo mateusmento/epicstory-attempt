@@ -30,3 +30,10 @@ comments:
     content: >
       Another comment on the strategy I'm using is that the docker image is built and store inside a
       ec2 instance. Another option would be to build it in a CI/CD pipeline and push it to a repository.
+  - createdAt: 2024-04-18 17:14
+    createdBy: omateusmento@gmail.com
+    content: >
+      Seems that the issue having to the image not being built and run is related to the time I ssh into
+      the instance. The image was still being built and have not finished yet but still the image wouldn't
+      run because of the run missed a detached mode. The deployment strategy is able to build the image
+      on ec2 instance and run in detached mode.
