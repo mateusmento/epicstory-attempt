@@ -1,0 +1,15 @@
+title: Introduce CI/CD pipeline for epicstory-api
+createdAt: 2024-04-18 17:24
+createdBy: omateusmento@gmail.com
+description: >
+  Although the deployment strategy is being able to build the infrastructure for deploying the epicstory-api
+  by leverage the automation of terraform, it is still manual since I have to execute a terraform command.
+  Also to build the application a docker image is being built and store inside the deployment ec2 instance
+  instead of in separate locations where it can be built and store independently.
+  
+  I want to introduce a CI/CD pipeline where a docker image is built for the application, stored in a image
+  registry and deployed into a ec2 instance where the image is run.
+
+  A few options I already have in mind. For the image registry Dockerhub and AWS ECR are two good options.
+  For the CI/CD pipeline I could use either Github Actions or CodePipeline. I see that AWS have other related
+  services such as CodeBuild, CodeComment and CodeDeploy as well.
