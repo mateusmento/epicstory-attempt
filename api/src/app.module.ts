@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypedConfigModule, dotenvLoader } from 'nest-typed-config';
 import { AppConfig } from './app.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         logger: 'advanced-console',
       }),
     }),
+    CqrsModule.forRoot(),
   ],
 })
 export class AppModule {}
