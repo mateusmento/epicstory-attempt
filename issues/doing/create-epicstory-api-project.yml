@@ -4,3 +4,8 @@ createdBy: omateusmento@gmail.com
 startedAt: 2024-04-18 11:07
 description: >
   Create epicstory api project using nestjs framework
+comments:
+  - author:
+      email: omateusmento@gmail.com
+    content: >
+      Created an empty nestjs application including editorconfig and vscode settings
