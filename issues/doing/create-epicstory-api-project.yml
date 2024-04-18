@@ -17,3 +17,8 @@ comments:
       - Used global validation pipe with class-validator and class-transformer
       - Used typed configuration with nest-typed-config
       - Defined configuration for port api listening to
+  - author:
+      email: omateusmento@gmail.com
+    createdAt: 2024-04-18 11:41
+    content: >
+      - Setup typeorm with better-sqlite3
