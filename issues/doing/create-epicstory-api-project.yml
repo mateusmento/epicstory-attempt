@@ -36,3 +36,8 @@ comments:
       - Added jest alias for src folder to make tests work properly
       - Refactor app module using factory function to allow tests to customize data source options
       - Added foo module to demonstrate the use of this project setup
+  - author:
+      email: omateusmento@gmail.com
+    createdAt: 2024-04-18 12:46
+    content: >
+      - Included increment foo feature for completeness when creating a demo for the front-end project
