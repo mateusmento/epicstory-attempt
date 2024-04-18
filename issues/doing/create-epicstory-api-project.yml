@@ -22,3 +22,9 @@ comments:
     createdAt: 2024-04-18 11:41
     content: >
       - Setup typeorm with better-sqlite3
+  - author:
+      email: omateusmento@gmail.com
+    createdAt: 2024-04-18 11:49
+    content: >
+      - Setup nestjs cqrs module
+      I believe this is a good stepstone for the setup of epicstory api and start implementing features.
