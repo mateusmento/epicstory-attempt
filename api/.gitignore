@@ -62,10 +62,10 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # terraform files
 
-/deploy/.terraform
-/deploy/.terraform.lock.hcl
-/deploy/terraform.tfstate
-/deploy/terraform.tfstate.backup
+.terraform*
+terraform.*
+
+# aws ssh keys
 /deploy/aws-epicstory.pem
 /deploy/aws-epicstory.pem.pub
 
