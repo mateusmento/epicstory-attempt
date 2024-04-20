@@ -8,6 +8,10 @@ async function bootstrap() {
 
   const config = app.get(AppConfig);
 
+  app.enableCors({
+    origin: 'http://localhost:8080',
+  });
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
