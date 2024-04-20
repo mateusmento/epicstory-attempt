@@ -1,6 +1,7 @@
 title: Introduce CI/CD pipeline for epicstory-api
 createdAt: 2024-04-18 17:24
 createdBy: omateusmento@gmail.com
+startedAt: 2024-04-20 13:14
 description: >
   Although the deployment strategy is being able to build the infrastructure for deploying the epicstory-api
   by leverage the automation of terraform, it is still manual since I have to execute a terraform command.
