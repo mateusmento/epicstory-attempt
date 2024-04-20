@@ -58,7 +58,7 @@ resource "aws_instance" "epicstory-api" {
   instance_type          = "t2.micro"
   key_name               = "aws-epicstory"
   vpc_security_group_ids = [aws_security_group.epicstory-api-sg.id]
-  user_data              = file("./install-epicstory-api.sh")
+  user_data              = file("./deploy.sh")
   tags = {
     Name = "epicstory-api"
   }
