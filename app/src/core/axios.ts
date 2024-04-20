@@ -12,6 +12,6 @@ class TransformAxios implements Transform<Axios, Axios> {
   }
 }
 
-export function InjectAxios() {
-  return injectWithTransform(Axios, TransformAxios);
+export function InjectAxios(options?: CreateAxiosDefaults) {
+  return injectWithTransform(Axios, TransformAxios, options);
 }
