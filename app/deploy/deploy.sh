@@ -12,8 +12,9 @@ newgrp docker
 # Building docker image
 
 git clone https://github.com/mateusmento/epicstory
-cd epicstory/app
+cd epicstory
 git checkout infra/app-deployment
+cd app
 docker build -t epicstory-app .
 
 # Running application
