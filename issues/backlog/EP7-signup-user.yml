@@ -1,0 +1,8 @@
+title: Sign up user
+createdBy: omateusmento@gmail.com
+createdAt: 2024-04-20 12:40
+labels: user-story
+description: >
+  As a user not authenticated
+  I want to sign up a user new account
+  To have access to a personalized experience on epicstory
