@@ -19,4 +19,4 @@ docker build -t epicstory-app .
 
 # Running application
 
-docker run -it -d -p 80:3000 epicstory-app
+docker run -it -d -p 80:80 epicstory-app
