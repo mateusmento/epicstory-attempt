@@ -43,3 +43,11 @@ comments:
       I've been learning Github Actions and figuring out how achieve the same results. So far I saw that I could
       use an action to apply those commands but I would need a step for configuring the aws cli with the action
       aws-actions/configure-aws-credentials and login docker to AWS ECR with aws-actions/amazon-ecr-login
+  - createdAt: 2024-04-21 20:24
+    createdBy: omateusmento@gmail.com
+    content: |
+      I was reading through some github actions documentations and figure that I could run different workflows
+      for different set of configuration. I also able to run steps with shell scripts in the selected OS. In order
+      to run tests for example I could simply include a step to run the test commands in the workflow (i.e. `npm test`).
+      Github actions also include docker and git, so I could use testcontainers in my tests without docker setup and
+      push changes to my repository in a workflow.
