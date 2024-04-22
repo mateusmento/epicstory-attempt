@@ -1,9 +1,9 @@
-name: Epicstory API CI/CD
+name: Epicstory APP CI/CD
 on:
   push:
     branches: infra/api-cicd
 jobs:
-  deploy:
+  deploy-app:
     runs-on: ubuntu-latest
     steps:
       - name: Chekout repository
