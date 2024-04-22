@@ -51,3 +51,10 @@ comments:
       to run tests for example I could simply include a step to run the test commands in the workflow (i.e. `npm test`).
       Github actions also include docker and git, so I could use testcontainers in my tests without docker setup and
       push changes to my repository in a workflow.
+  - createdAt: 2024-04-21 20:52
+    createdBy: omateusmento@gmail.com
+    content: |
+      Github Actions seems to work seemsly with integration tests with docker and testcontainers. I was able to create
+      a workflow for running tests with testcontainers without any additional setup. I only executed a test command and
+      testcontainers was able to create the postgresql container needed for the test. The tests results are displayed in
+      the actions execution page.
