@@ -64,10 +64,31 @@ resource "aws_instance" "epicstory-api" {
   instance_type          = "t2.micro"
   key_name               = "aws-epicstory"
   vpc_security_group_ids = [aws_security_group.epicstory-api-sg.id]
-  user_data              = file("./deploy.sh")
+  user_data              = templatefile("./deploy.sh", {
+    AWS_ACCESS_KEY_ID = var.AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY = var.AWS_SECRET_ACCESS_KEY,
+    AWS_REGION = var.AWS_REGION,
+    AWS_REGISTRY = var.AWS_REGISTRY,
+  })
   tags = {
     Name = "epicstory-api"
   }
+}
+
+variable "AWS_ACCESS_KEY_ID" {
+  type = string
+}
+
+variable "AWS_SECRET_ACCESS_KEY" {
+  type = string
+}
+
+variable "AWS_REGION" {
+  type = string
+}
+
+variable "AWS_REGISTRY" {
+  type = string
 }
 
 output "epicstory-api-host" {

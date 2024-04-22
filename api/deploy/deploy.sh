@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install dependencies
-
+echo "Install dependencies"
 yum update -y
 yum install docker -y
 systemctl start docker
@@ -9,7 +9,13 @@ systemctl enable docker
 usermod -aG docker $USER
 newgrp docker
 
-# Run application
+# Configure AWS CLI
+echo "Configure AWS CLI"
+aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+aws configure set region ${AWS_REGION}
 
-aws ecr get-login-password --region sa-east-1 | docker login --username AWS --password-stdin 429249706241.dkr.ecr.sa-east-1.amazonaws.com
-docker run -it -d -p 80:3000 429249706241.dkr.ecr.sa-east-1.amazonaws.com/epicstory-api
+# Run application
+echo "Run application"
+aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/epicstory-api
+docker run -it -d -p 80:3000 ${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/epicstory-api
