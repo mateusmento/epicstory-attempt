@@ -184,3 +184,11 @@ comments:
       publish with that tag, leaving previous latest versions untagged in AWS ECR.
 
       Also I wish to only run the deployment over new versions.
+  - createdAt: 2024-04-22 18:29
+    createdBy: omateusmento@gmail.com
+    content: |
+      To complete this issue I am going to need a strategy to configure updated url of each api and app.
+      The api needs the url of app to allow cors origin and the app needs the api url to send request to.
+      I still have no idea of how to implement it. I might need to connect to some external service to
+      retrieve those urls, or might use a configuration service, or maybe use additional scripts in the
+      deployment.
