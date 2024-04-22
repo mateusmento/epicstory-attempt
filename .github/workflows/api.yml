@@ -6,19 +6,27 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Chekout repository
+        uses: actions/checkout@v4
       - name: Configure AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      - id: login-ecr
+      - name: Login Docker to AWS ECR
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
         with:
           registries: ${{ secrets.AWS_REGISTRY }}
-      - run: |
+      - name: Build and publish docker image
+        run: |
           cd api
           docker build -t epicstory-api .
           docker tag epicstory-api ${{ steps.login-ecr.outputs.registry }}/epicstory-api
           docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-api
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Deploy terraform plan
+        run: |
+          terraform apply --auto-approve
