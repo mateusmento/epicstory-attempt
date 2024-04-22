@@ -63,3 +63,54 @@ comments:
     content: |
       I think that for this issue a CI/CD pipeline that can test the application, build and publish a docker image and
       deploy a containerized application in aws ec2 instance using terraform would be enough for now.
+  - createdAt: 2024-04-22 11:47
+    createdBy: omateusmento@gmail.com
+    content: |
+      Great, I was able to introduce a github action that builds and publishes a docker image in to aws ecr. I needed
+      to configure aws with access keys in the workflow as well providing repository secrets for those keys. I also
+      needed to login docker to the AWS ECR registry to be able to later push the docker image in another step.
+
+      All was need is two actions (aws-actions/configure-aws-credentials and aws-actions/amazon-ecr-login) to configure
+      aws and login docker to aws ecr, plus some shell commands for building and publishing of the docker image:
+
+      ```yaml
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Login Docker to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ secrets.AWS_REGISTRY }}
+      - name: Build and publish docker image
+        run: |
+          cd api
+          docker build -t epicstory-api .
+          docker tag epicstory-api ${{ steps.login-ecr.outputs.registry }}/epicstory-api
+          docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-api
+      ```
+
+      My next plan is to include terraform in the workflow to deploy a containerized application in an ec2 instance
+      using the published docker image. But for that I also going to need to setup a terraform backend on AWS S3 so
+      that the terraform state is not located and than lost in the workflow run. I need the terraform state persisted
+      elsewhere so that I can locally destroy the resources created by the workflow on github actions.
+
+      So far I'm using steup-terraform action
+
+      ```
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+      ```
+
+      And including a backend config in main.tf.
+
+      ```
+      backend "s3" {
+        bucket = "epicstory-terraform-backend"
+        key    = "api/terraform.tfstate"
+        region = "sa-east-1"
+      }
+      ```
