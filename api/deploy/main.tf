@@ -23,11 +23,11 @@ data "aws_vpc" "default" {
   default = true
 }
 
-resource "aws_key_pair" "aws-epicstory" {
-  key_name = "aws-epicstory"
-  # ssh-keygen -t rsa -f aws-epicstory.pem
-  public_key = file("./aws-epicstory.pem.pub")
-}
+# resource "aws_key_pair" "aws-epicstory" {
+#   key_name = "aws-epicstory"
+#   # ssh-keygen -t rsa -f aws-epicstory.pem
+#   public_key = file("./aws-epicstory.pem.pub")
+# }
 
 resource "aws_security_group" "epicstory-api-sg" {
   name   = "epicstory-api-sg"
