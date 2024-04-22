@@ -1,7 +1,7 @@
 name: Epicstory API CI/CD
 on:
   push:
-    branches: main
+    branches: infra/api-cicd
 jobs:
   deploy:
     runs-on: ubuntu-latest
