@@ -15,7 +15,7 @@ jobs:
       - name: Run unit tests
         run: |
           cd app
-          npm test
+          npm run test:unit
       - name: Configure AWS CLI
         uses: aws-actions/configure-aws-credentials@v3
         with:
