@@ -41,9 +41,9 @@ resource "aws_security_group" "epicstory-api-sg" {
   }
 
   ingress {
-    protocol = "tcp"
-    from_port = 22
-    to_port = 22
+    protocol    = "tcp"
+    from_port   = 22
+    to_port     = 22
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -64,11 +64,11 @@ resource "aws_instance" "epicstory-api" {
   instance_type          = "t2.micro"
   key_name               = "aws-epicstory"
   vpc_security_group_ids = [aws_security_group.epicstory-api-sg.id]
-  user_data              = templatefile("./deploy.sh", {
-    AWS_ACCESS_KEY_ID = var.AWS_ACCESS_KEY_ID,
+  user_data = templatefile("./deploy.sh", {
+    AWS_ACCESS_KEY_ID     = var.AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY = var.AWS_SECRET_ACCESS_KEY,
-    AWS_REGION = var.AWS_REGION,
-    AWS_REGISTRY = var.AWS_REGISTRY,
+    AWS_REGION            = var.AWS_REGION,
+    AWS_REGISTRY          = var.AWS_REGISTRY,
   })
   tags = {
     Name = "epicstory-api"

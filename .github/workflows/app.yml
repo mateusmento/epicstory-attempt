@@ -1,0 +1,46 @@
+name: Epicstory API CI/CD
+on:
+  push:
+    branches: infra/api-cicd
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          cd app
+          npm ci
+      - name: Run unit tests
+        run: |
+          cd app
+          npm test
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Login Docker to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ secrets.AWS_REGISTRY }}
+      - name: Build and publish docker image
+        run: |
+          cd app
+          docker build -t epicstory-app .
+          docker tag epicstory-app ${{ steps.login-ecr.outputs.registry }}/epicstory-app
+          docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-app
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Deploy terraform plan
+        run: |
+          cd app/deploy
+          terraform init
+          terraform apply --auto-approve \
+            -var="AWS_ACCESS_KEY_ID=${{secrets.AWS_ACCESS_KEY_ID}}" \
+            -var="AWS_SECRET_ACCESS_KEY=${{secrets.AWS_SECRET_ACCESS_KEY}}" \
+            -var="AWS_REGISTRY=${{secrets.AWS_REGISTRY}}" \
+            -var="AWS_REGION=${{secrets.AWS_REGION}}" \

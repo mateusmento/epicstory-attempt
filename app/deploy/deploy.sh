@@ -1,22 +1,21 @@
 #!/bin/bash
 
-# Installing dependencies
+# Install dependencies
+echo "Install dependencies"
 yum update -y
-yum install git -y
 yum install docker -y
 systemctl start docker
 systemctl enable docker
 usermod -aG docker $USER
 newgrp docker
 
-# Building docker image
+# Configure AWS CLI
+echo "Configure AWS CLI"
+aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+aws configure set region ${AWS_REGION}
 
-git clone https://github.com/mateusmento/epicstory
-cd epicstory
-git checkout infra/app-deployment
-cd app
-docker build -t epicstory-app .
-
-# Running application
-
-docker run -it -d -p 80:80 epicstory-app
+# Run application
+echo "Run application"
+aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/epicstory-app
+docker run -it -d -p 80:80 ${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/epicstory-app
