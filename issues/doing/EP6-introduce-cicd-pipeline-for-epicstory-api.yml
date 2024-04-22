@@ -11,14 +11,14 @@ description: >
   I want to introduce a CI/CD pipeline where a docker image is built for the application, stored in a image
   registry and deployed into a ec2 instance where the image is run.
 
-  A few options I already have in mind. For the image registry Dockerhub and AWS ECR are two good options.
-  For the CI/CD pipeline I could use either Github Actions or CodePipeline. I see that AWS have other related
-  services such as CodeBuild, CodeComment and CodeDeploy as well.
+  A few options I already have in mind. For the image registry, Dockerhub and AWS ECR are two good options.
+  For the CI/CD pipeline, I could use either Github Actions or CodePipeline. I see that AWS have other related
+  services such as CodeBuild, CodeCommit and CodeDeploy as well.
 comments:
   - createdAt: 2024-04-19 11:57
     createdBy: omateusmento@gmail.com
     content: >
-      I've being learning AWS ECR until this moment and so far I was able to publish a docker image a repository
+      I've being learning AWS ECR until this moment and so far I was able to publish a docker image in a repository
       at AWS ECR. It only needed a few AWS CLI commands:
       ```
       # Building docker image
@@ -40,15 +40,15 @@ comments:
   - createdAt: 2024-04-19 12:05
     createdBy: omateusmento@gmail.com
     content: >
-      I've been learning Github Actions and figuring out how achieve the same results. So far I saw that I could
+      I've been learning Github Actions and figuring out how to achieve the same results. So far I saw that I could
       use an action to apply those commands but I would need a step for configuring the aws cli with the action
       aws-actions/configure-aws-credentials and login docker to AWS ECR with aws-actions/amazon-ecr-login
   - createdAt: 2024-04-21 20:24
     createdBy: omateusmento@gmail.com
     content: |
       I was reading through some github actions documentations and figure that I could run different workflows
-      for different set of configuration. I also able to run steps with shell scripts in the selected OS. In order
-      to run tests for example I could simply include a step to run the test commands in the workflow (i.e. `npm test`).
+      for different set of configuration. I also was able to run steps with shell scripts in the selected OS. In order
+      to run tests, for example, I could simply include a step to run the test commands in the workflow (i.e. `npm test`).
       Github actions also include docker and git, so I could use testcontainers in my tests without docker setup and
       push changes to my repository in a workflow.
   - createdAt: 2024-04-21 20:52
@@ -66,9 +66,9 @@ comments:
   - createdAt: 2024-04-22 11:47
     createdBy: omateusmento@gmail.com
     content: |
-      Great, I was able to introduce a github action that builds and publishes a docker image in to aws ecr. I needed
-      to configure aws with access keys in the workflow as well providing repository secrets for those keys. I also
-      needed to login docker to the AWS ECR registry to be able to later push the docker image in another step.
+      Great, I was able to introduce a github action that builds and publishes a docker image into AWS ECR. I needed
+      to configure aws with access keys in the workflow as well as providing repository secrets for those keys. I also
+      needed to login docker to the AWS ECR registry to be able to publish the docker image later in another step.
 
       All was need is two actions (aws-actions/configure-aws-credentials and aws-actions/amazon-ecr-login) to configure
       aws and login docker to aws ecr, plus some shell commands for building and publishing of the docker image:
@@ -94,23 +94,93 @@ comments:
       ```
 
       My next plan is to include terraform in the workflow to deploy a containerized application in an ec2 instance
-      using the published docker image. But for that I also going to need to setup a terraform backend on AWS S3 so
-      that the terraform state is not located and than lost in the workflow run. I need the terraform state persisted
-      elsewhere so that I can locally destroy the resources created by the workflow on github actions.
+      using the published docker image. But for that I am going to need to setup a terraform remote backend on AWS S3 so
+      that the terraform state is not persisted in the workflow run and than lost after completion. I need the terraform
+      state persisted elsewhere so that I can locally destroy the resources created by the workflow on github actions.
 
-      So far I'm using steup-terraform action
+      So far I'm using setup-terraform action
 
-      ```
+      ```yaml
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
       ```
 
       And including a backend config in main.tf.
 
-      ```
+      ```terraform
       backend "s3" {
         bucket = "epicstory-terraform-backend"
         key    = "api/terraform.tfstate"
         region = "sa-east-1"
       }
       ```
+  - createdAt: 2024-04-22 16:40
+    createdBy: omateusmento@gmail.com
+    content: |
+      Ok, great! I was thankfully able to create the github action. It builds the docker image, publishes it in AWS ECR
+      and than run terraform to deploy the containerized application in a ec2 instance.
+
+      The final workflow looks like this:
+
+      ```yaml
+      name: Epicstory API CI/CD
+      on:
+        push:
+          branches: infra/api-cicd
+      jobs:
+        deploy:
+          runs-on: ubuntu-latest
+          steps:
+            - name: Chekout repository
+              uses: actions/checkout@v4
+            - name: Configure AWS CLI
+              uses: aws-actions/configure-aws-credentials@v2
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: ${{ secrets.AWS_REGION }}
+            - name: Login Docker to AWS ECR
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@v2
+              with:
+                registries: ${{ secrets.AWS_REGISTRY }}
+            - name: Build and publish docker image
+              run: |
+                cd api
+                docker build -t epicstory-api .
+                docker tag epicstory-api ${{ steps.login-ecr.outputs.registry }}/epicstory-api
+                docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-api
+            - name: Setup terraform
+              uses: hashicorp/setup-terraform@v3
+            - name: Deploy terraform plan
+              run: |
+                cd api/deploy
+                terraform init
+                terraform apply --auto-approve \
+                  -var="AWS_ACCESS_KEY_ID=${{secrets.AWS_ACCESS_KEY_ID}}" \
+                  -var="AWS_SECRET_ACCESS_KEY=${{secrets.AWS_SECRET_ACCESS_KEY}}" \
+                  -var="AWS_REGISTRY=${{secrets.AWS_REGISTRY}}" \
+                  -var="AWS_REGION=${{secrets.AWS_REGION}}" \
+      ```
+
+      I needed to introduce secrets of aws access keys not only for configuring aws cli in the workflow but for
+      injecting them into terraform and configure aws cli inside the deployed ec2 instance so that the docker image
+      could be downloaded from AWS ECR and run in the instance. The shell script to deploy the container is as follows:
+
+      ```bash
+      # Configure AWS CLI
+      echo "Configure AWS CLI"
+      aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+      aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+      aws configure set region ${AWS_REGION}
+
+      # Run application
+      echo "Run application"
+      aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/epicstory-api
+      docker run -it -d -p 80:3000 ${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/epicstory-api
+      ```
+
+      I need to improve the versioning aspect of the docker image. It always build an image with the "latest" tag and
+      publish with that tag, leaving previous latest versions untagged in AWS ECR.
+
+      Also I wish to only run the deployment over new versions.
