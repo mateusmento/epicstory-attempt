@@ -27,6 +27,7 @@ jobs:
           docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-api
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
-      - name: Deploy terraform plan
-        run: |
-          terraform apply --auto-approve
+      # - name: Deploy terraform plan
+      #   run: |
+      #     cd deploy
+      #     terraform apply --auto-approve
