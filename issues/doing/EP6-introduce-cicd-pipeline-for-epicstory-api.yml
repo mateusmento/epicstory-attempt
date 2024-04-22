@@ -58,3 +58,8 @@ comments:
       a workflow for running tests with testcontainers without any additional setup. I only executed a test command and
       testcontainers was able to create the postgresql container needed for the test. The tests results are displayed in
       the actions execution page.
+  - createdAt: 2024-04-22 08:42
+    createdBy: omateusmento@gmail.com
+    content: |
+      I think that for this issue a CI/CD pipeline that can test the application, build and publish a docker image and
+      deploy a containerized application in aws ec2 instance using terraform would be enough for now.
