@@ -7,6 +7,12 @@ terraform {
       version = "~> 4.16"
     }
   }
+
+  backend "s3" {
+    bucket = "epicstory-terraform-backend"
+    key    = "api/terraform.tfstate"
+    region = "sa-east-1"
+  }
 }
 
 provider "aws" {
