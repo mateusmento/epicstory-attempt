@@ -15,12 +15,6 @@
 		{
 			"name": "app",
 			"path": "app"
-		},
-		{
-			"path": "../../learning/ecsec2"
-		},
-		{
-			"path": "../../learning/food-delivery-microservices"
 		}
 	]
 }
