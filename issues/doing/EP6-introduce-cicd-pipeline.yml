@@ -192,3 +192,12 @@ comments:
       I still have no idea of how to implement it. I might need to connect to some external service to
       retrieve those urls, or might use a configuration service, or maybe use additional scripts in the
       deployment.
+  - createdAt: 2024-04-23 10:56
+    createdBy: omateusmento@gmail.com
+    content: |
+      To solve the url dependency between both api and app, I could either use a external service for
+      service discovery or simply run a script to search for the public ips of each deployed instance.
+      Other strategy to avoid the dependency is to either deploy the api and app in the same instance
+      or run them in the same terraform plan where the public ip is easily retrieve but only for one
+      of them because there can't be a cyclic dependency between resources (an additional script would
+      be needed to fill the other url dependency).
