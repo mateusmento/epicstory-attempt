@@ -39,4 +39,5 @@ docker build -t epicstory-app --build-arg API_URL=$API_URL .
 
 # Run application
 echo "Run application"
+echo "API_HOSTNAME=$API_HOSTNAME"
 docker run -it -d --rm -p 80:80 epicstory-app
