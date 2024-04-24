@@ -22,17 +22,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      - name: Login Docker to AWS ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-        with:
-          registries: ${{ secrets.AWS_REGISTRY }}
-      - name: Build and publish docker image
-        run: |
-          cd app
-          docker build -t epicstory-app .
-          docker tag epicstory-app ${{ steps.login-ecr.outputs.registry }}/epicstory-app
-          docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-app
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
       - name: Deploy terraform plan
