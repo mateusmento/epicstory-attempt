@@ -1,5 +1,7 @@
 FROM node:20.12.0-bullseye-slim as build
 
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 WORKDIR /home/node/app
 RUN chown node:node .
 USER node
