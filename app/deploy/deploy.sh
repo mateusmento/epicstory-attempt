@@ -28,14 +28,14 @@ export API_HOSTNAME=$(aws ec2 describe-instances \
   --query Reservations[*].Instances[*].PublicDnsName \
   --filters "Name=tag:Name,Values=epicstory-api")
 
-export VITE_API_URL="http://$API_HOSTNAME"
+export API_URL="http://$API_HOSTNAME"
 
 # Build image
 echo "Building docker image"
 git clone https://github.com/mateusmento/epicstory
 cd epicstory/app
 git checkout infra/cicd
-docker build -t epicstory-app --build-arg VITE_API_URL=$VITE_API_URL .
+docker build -t epicstory-app --build-arg API_URL=$API_URL .
 
 # Run application
 echo "Run application"
