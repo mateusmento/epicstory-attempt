@@ -2,6 +2,7 @@ FROM node:20.12.0-bullseye-slim as build
 
 ARG API_URL
 ENV VITE_API_URL=$API_URL
+ENV NODE_ENV=production
 WORKDIR /home/node/app
 RUN chown node:node .
 USER node
