@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class AppConfig {
@@ -6,4 +7,8 @@ export class AppConfig {
 
   @IsNotEmpty()
   DATABASE_NAME: string = 'epicstory';
+
+  @IsNotEmpty()
+  @Transform(({ value }) => value.split(',').map((v) => v.trim()))
+  CORS_ORIGINS: string[] = ['http://localhost:8080'];
 }
