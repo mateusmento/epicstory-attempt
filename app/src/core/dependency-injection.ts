@@ -1,11 +1,9 @@
-import { container as tsyringe, type DependencyContainer, type InjectionToken } from 'tsyringe';
+import { type DependencyContainer, type InjectionToken } from 'tsyringe';
 import { inject, type App, type Plugin } from 'vue';
 
-export function createDependencyContainer(configure: (container: DependencyContainer) => unknown) {
+export function createDependenciesPlugin(container: DependencyContainer) {
   return {
     install(app: App) {
-      const container = tsyringe.createChildContainer();
-      configure(container);
       app.provide('dependencies', container);
     },
   } as Plugin;
