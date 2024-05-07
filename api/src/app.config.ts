@@ -10,5 +10,5 @@ export class AppConfig {
 
   @IsNotEmpty()
   @Transform(({ value }) => value.split(',').map((v) => v.trim()))
-  CORS_ORIGINS: string[] = ['http://localhost:8080'];
+  CORS_ORIGINS: string[] = ['http://localhost:8080', 'http://localhost:4173'];
 }
