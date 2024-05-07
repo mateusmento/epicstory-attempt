@@ -4,7 +4,7 @@ import { injectable } from 'tsyringe';
 
 @injectable()
 export class FooService {
-  constructor(@InjectAxios({ baseURL: import.meta.env.VITE_API_URL }) private axios: Axios) {}
+  constructor(@InjectAxios() private axios: Axios) {}
 
   getFoos() {
     return this.axios.get('/foos').then((res) => res.data);
