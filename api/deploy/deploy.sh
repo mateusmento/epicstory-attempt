@@ -28,12 +28,11 @@ echo "Retrieving epicstory-app instance public dns"
 export APP_HOSTNAME=$(aws ec2 describe-instances \
   --output text \
   --query Reservations[*].Instances[*].PublicDnsName \
-  --filters "Name=tag:Name,Values=epicstory-app")
+  --filters "Name=tag:Name,Values=epicstory-app" | tr -d '\n')
 
 export CORS_ORIGINS="http://$APP_HOSTNAME"
 
 # Run application
 echo "Run application"
 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/epicstory-api
-echo "docker run -it -d -p 80:3000 -e CORS_ORIGINS=$CORS_ORIGINS ${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/epicstory-api"
 docker run -it -d -p 80:3000 -e CORS_ORIGINS=$CORS_ORIGINS ${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/epicstory-api
