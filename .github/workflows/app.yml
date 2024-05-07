@@ -30,11 +30,11 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
-      - name: Deploy terraform plan
+      - name: Init terraform backend
         run: |
           cd app/deploy
           terraform init
-      - name: Deploy terraform plan
+      - name: Revert terraform plan
         run: |
           cd app/deploy
           terraform destroy --auto-approve \
@@ -56,7 +56,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
-      - name: Deploy terraform plan
+      - name: Init terraform backend
         run: |
           cd app/deploy
           terraform init
