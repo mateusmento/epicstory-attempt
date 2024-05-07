@@ -16,7 +16,7 @@ jobs:
         run: |
           cd app
           npm run test:unit
-  init-app-terraform:
+  revert-app-deploy:
     runs-on: ubuntu-latest
     needs: test-app
     steps:
@@ -34,20 +34,6 @@ jobs:
         run: |
           cd app/deploy
           terraform init
-  revert-app-deploy:
-    runs-on: ubuntu-latest
-    needs: init-app-terraform
-    steps:
-      - name: Chekout repository
-        uses: actions/checkout@v4
-      - name: Configure AWS CLI
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Setup terraform
-        uses: hashicorp/setup-terraform@v3
       - name: Deploy terraform plan
         run: |
           cd app/deploy
@@ -70,6 +56,10 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
+      - name: Deploy terraform plan
+        run: |
+          cd app/deploy
+          terraform init
       - name: Deploy terraform plan
         run: |
           cd app/deploy
