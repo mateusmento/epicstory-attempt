@@ -6,12 +6,19 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
-import dependencies from './dependencies';
+import createDependencies from './dependencies';
+import { createDependenciesPlugin } from '@/core/dependency-injection';
 
-const app = createApp(App);
+async function main() {
+  const app = createApp(App);
 
-app.use(createPinia());
-app.use(router);
-app.use(dependencies);
+  app.use(createPinia());
+  app.use(router);
 
-app.mount('#app');
+  const dependencies = await createDependencies();
+  app.use(createDependenciesPlugin(dependencies));
+
+  app.mount('#app');
+}
+
+main();
