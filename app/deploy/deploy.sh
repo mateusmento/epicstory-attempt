@@ -29,7 +29,7 @@ echo "Retrieving epicstory-api instance public dns"
 export API_HOSTNAME=$(aws ec2 describe-instances \
   --output text \
   --query Reservations[*].Instances[*].PublicDnsName \
-  --filters "Name=tag:Name,Values=epicstory-api")
+  --filters "Name=tag:Name,Values=epicstory-api" | tr -d '\n')
 
 export API_URL="http://$API_HOSTNAME"
 
@@ -42,5 +42,4 @@ docker build -t epicstory-app --build-arg API_URL=$API_URL .
 
 # Run application
 echo "Run application"
-echo "API_HOSTNAME=$API_HOSTNAME"
 docker run -it -d --rm -p 80:80 epicstory-app
