@@ -16,12 +16,15 @@ aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
 aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
 aws configure set region ${AWS_REGION}
 
-# Wait for epicstory-api instance to run
-echo "Waiting to retreive epicstory-api ec2 instance public dns"
+# Waiting for epicstory-api instance to launch
+echo "Waiting for epicstory-api instance to launch"
 
 aws ec2 wait instance-exists \
   --filters "Name=tag:Name,Values=epicstory-api" \
   --filters "Name=instance-state-name,Values=running"
+
+# Retrieving epicstory-api instance public dns
+echo "Retrieving epicstory-api instance public dns"
 
 export API_HOSTNAME=$(aws ec2 describe-instances \
   --output text \
