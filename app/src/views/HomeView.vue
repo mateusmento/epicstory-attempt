@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import { useDependency } from '@/core/dependency-injection';
 import { WorkspaceService } from '@/services/workspace.service';
+import type { Workspace } from '@/types/workspace';
 import { reactive, ref } from 'vue';
-
-interface Workspace {
-  id: number;
-  name: string;
-}
 
 const workspaceService = useDependency(WorkspaceService);
 
