@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useDependency } from '@/core/dependency-injection';
+import { WorkspaceService } from '@/services/workspace.service';
 import { reactive, ref } from 'vue';
 
 interface Workspace {
@@ -6,18 +8,18 @@ interface Workspace {
   name: string;
 }
 
+const workspaceService = useDependency(WorkspaceService);
+
 const workspaces = ref<Workspace[]>([]);
 
 const workspace = reactive({
   name: '',
 });
 
-function createWorkspace() {
-  const maxId = workspaces.value.reduce((maxId, w) => Math.max(maxId, w.id), 0) + 1;
-  workspaces.value.push({
-    id: maxId,
-    ...workspace,
-  });
+async function createWorkspace() {
+  const created = await workspaceService.createWorkspace(workspace.name).then((res) => res.data);
+  workspaces.value.push(created);
+  workspace.name = '';
 }
 </script>
 
