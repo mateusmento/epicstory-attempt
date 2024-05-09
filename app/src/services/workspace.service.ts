@@ -1,4 +1,5 @@
 import { InjectAxios } from '@/core/axios';
+import type { Workspace } from '@/types/workspace';
 import type { Axios } from 'axios';
 import { injectable } from 'tsyringe';
 
@@ -7,6 +8,6 @@ export class WorkspaceService {
   constructor(@InjectAxios() private axios: Axios) {}
 
   createWorkspace(name: string) {
-    return this.axios.post('/workspaces', { name });
+    return this.axios.post<Workspace>('/workspaces', { name });
   }
 }
