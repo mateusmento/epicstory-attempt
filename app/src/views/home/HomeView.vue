@@ -4,6 +4,7 @@ import { WorkspaceService } from '@/services/workspace.service';
 import type { Workspace } from '@/types/workspace';
 import { ref } from 'vue';
 import CreateWorkspaceForm from './CreateWorkspaceForm.vue';
+import WorkspaceList from './WorkspaceList.vue';
 
 const workspaceService = useDependency(WorkspaceService);
 
@@ -19,8 +20,6 @@ async function createWorkspace(formData: { name: string }) {
   <main>
     <h1>Workspaces</h1>
     <CreateWorkspaceForm @submit="createWorkspace" />
-    <ul data-testid="workspace-list">
-      <li v-for="workspace of workspaces" :key="workspace.id">{{ workspace.name }}</li>
-    </ul>
+    <WorkspaceList :workspaces="workspaces" />
   </main>
 </template>
