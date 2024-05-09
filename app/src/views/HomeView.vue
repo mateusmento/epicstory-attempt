@@ -8,14 +8,14 @@ const workspaceService = useDependency(WorkspaceService);
 
 const workspaces = ref<Workspace[]>([]);
 
-const workspace = reactive({
+const formData = reactive({
   name: '',
 });
 
 async function createWorkspace() {
-  const created = await workspaceService.createWorkspace(workspace.name).then((res) => res.data);
-  workspaces.value.push(created);
-  workspace.name = '';
+  const workspace = await workspaceService.createWorkspace(formData.name).then((res) => res.data);
+  workspaces.value.push(workspace);
+  formData.name = '';
 }
 </script>
 
@@ -25,7 +25,7 @@ async function createWorkspace() {
     <form @submit.prevent="createWorkspace">
       <h2>Create workspace</h2>
       <label>Name</label>
-      <input v-model="workspace.name" data-testid="workspace-name-input" />
+      <input v-model="formData.name" data-testid="workspace-name-input" />
       <button type="submit" data-testid="create-workspace-button">Create</button>
     </form>
     <ul data-testid="workspace-list">
