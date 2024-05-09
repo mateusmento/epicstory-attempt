@@ -20,5 +20,6 @@ describe('Create workspace', () => {
     workspaceNameInput().type('Derbel');
     createWorkspaceButton().click();
     workspaceList().contains('Derbel');
+    workspaceNameInput().should('have.value', '');
   });
 });
