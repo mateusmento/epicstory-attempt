@@ -6,14 +6,19 @@ describe('Create workspace', () => {
     cy.intercept('POST', `${API_URL}/workspaces`, (req) => {
       req.reply({ id: idCounter++, name: req.body.name });
     });
+
+    const workspaceNameInput = () => cy.get('[data-testid="workspace-name-input"]');
+    const createWorkspaceButton = () => cy.get('[data-testid="create-workspace-button"');
+    const workspaceList = () => cy.get('[data-testid="workspace-list"]');
+
     cy.visit('/');
     cy.contains('Workspaces');
-    cy.get('[data-testid="workspace-name-input"]').type('Epicstory');
-    cy.get('[data-testid="create-workspace-button"').click();
-    cy.get('[data-testid="workspace-list"]').contains('Epicstory');
-    cy.get('[data-testid="workspace-name-input"]').should('have.value', '');
-    cy.get('[data-testid="workspace-name-input"]').type('Derbel');
-    cy.get('[data-testid="create-workspace-button"').click();
-    cy.get('[data-testid="workspace-list"]').contains('Derbel');
+    workspaceNameInput().type('Epicstory');
+    createWorkspaceButton().click();
+    workspaceList().contains('Epicstory');
+    workspaceNameInput().should('have.value', '');
+    workspaceNameInput().type('Derbel');
+    createWorkspaceButton().click();
+    workspaceList().contains('Derbel');
   });
 });
