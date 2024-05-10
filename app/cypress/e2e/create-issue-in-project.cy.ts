@@ -1,11 +1,11 @@
-import { createWorkspace, workspaceList } from './home';
+import { createWorkspace, workspaceList } from './page-objects/home';
 import {
   interceptCreateIssueEndpoint,
   interceptCreateProjectEndpoint,
   interceptCreateWorkspaceEndpoint,
 } from './intercepts';
-import { createIssue, expectIssueCreated } from './project';
-import { createProject, projectList } from './workspace';
+import { createIssue, expectIssueCreated } from './page-objects/project';
+import { createProject, projectList } from './page-objects/workspace';
 
 describe('Create issue in project', () => {
   it('should create issue in project', () => {
