@@ -1,3 +1,7 @@
+import { createWorkspace, workspaceList } from './home';
+import { createIssue, expectIssueCreated } from './project';
+import { createProject } from './workspace';
+
 describe('Create issue in project', () => {
   const API_URL = 'http://localhost:3000';
 
@@ -17,36 +21,16 @@ describe('Create issue in project', () => {
 
     cy.visit('/');
 
-    const workspaceNameInput = () => cy.get('[data-testid="workspace-name-input"]');
-    const createWorkspaceButton = () => cy.get('[data-testid="create-workspace-button"');
-    const workspaceList = () => cy.get('[data-testid="workspace-list"]');
-
-    workspaceNameInput().type('Epicstory');
-    createWorkspaceButton().click();
+    createWorkspace('Epicstory');
     workspaceList().contains('Epicstory').click();
+    createProject('Epicstory Api');
 
-    cy.contains('Workspace 1');
+    const issueTitle1 = 'Create workspace';
+    createIssue(issueTitle1);
+    expectIssueCreated(issueTitle1);
 
-    const projectNameInput = () => cy.get('[data-testid="project-name-input"');
-    const createProjectButton = () => cy.get('[data-testid="create-project-button"');
-    const projectList = () => cy.get('[data-testid="project-list"]');
-
-    projectNameInput().type('Epicstory Api');
-    createProjectButton().click();
-    projectList().contains('Epicstory Api').click();
-
-    const issueNameInput = () => cy.get('[data-testid="issue-name-input"');
-    const createIssueButton = () => cy.get('[data-testid="create-issue-button"');
-    const issueList = () => cy.get('[data-testid="issue-list"]');
-
-    const createIssue = (name: string) => {
-      issueNameInput().type(name);
-      createIssueButton().click();
-      issueList().contains(name);
-      issueNameInput().should('have.value', '');
-    };
-
-    createIssue('Create workspace');
-    createIssue('Create project in workspace');
+    const issueTitle2 = 'Create project in workspace';
+    createIssue(issueTitle2);
+    expectIssueCreated(issueTitle2);
   });
 });
