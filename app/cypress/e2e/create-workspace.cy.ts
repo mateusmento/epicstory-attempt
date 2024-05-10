@@ -1,3 +1,5 @@
+import { createWorkspace, expectWorkspaceCreated } from './home';
+
 describe('Create workspace', () => {
   const API_URL = 'http://localhost:3000';
 
@@ -10,18 +12,10 @@ describe('Create workspace', () => {
     cy.visit('/');
     cy.contains('Workspaces');
 
-    const workspaceNameInput = () => cy.get('[data-testid="workspace-name-input"]');
-    const createWorkspaceButton = () => cy.get('[data-testid="create-workspace-button"');
-    const workspaceList = () => cy.get('[data-testid="workspace-list"]');
-
-    const createWorkspace = (name: string) => {
-      workspaceNameInput().type(name);
-      createWorkspaceButton().click();
-      workspaceList().contains(name);
-      workspaceNameInput().should('have.value', '');
-    };
-
     createWorkspace('Epicstory');
+    expectWorkspaceCreated('Epicstory');
+
     createWorkspace('Derbel');
+    expectWorkspaceCreated('Derbel');
   });
 });
