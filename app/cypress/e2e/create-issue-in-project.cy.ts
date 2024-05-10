@@ -1,6 +1,6 @@
 import { createWorkspace, workspaceList } from './home';
 import { createIssue, expectIssueCreated } from './project';
-import { createProject } from './workspace';
+import { createProject, projectList } from './workspace';
 
 describe('Create issue in project', () => {
   const API_URL = 'http://localhost:3000';
@@ -21,9 +21,13 @@ describe('Create issue in project', () => {
 
     cy.visit('/');
 
-    createWorkspace('Epicstory');
-    workspaceList().contains('Epicstory').click();
-    createProject('Epicstory Api');
+    const workspaceName = 'Epicstory';
+    createWorkspace(workspaceName);
+    workspaceList().contains(workspaceName).click();
+
+    const projectName = 'Epicstory Api';
+    createProject(projectName);
+    projectList().contains(projectName).click();
 
     const issueTitle1 = 'Create workspace';
     createIssue(issueTitle1);
