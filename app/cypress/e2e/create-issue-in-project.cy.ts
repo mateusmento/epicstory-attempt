@@ -42,7 +42,7 @@ describe('Create issue in project', () => {
     const createIssue = (name: string) => {
       issueNameInput().type(name);
       createIssueButton().click();
-      issueList().contains(name).click();
+      issueList().contains(name);
       issueNameInput().should('have.value', '');
     };
 

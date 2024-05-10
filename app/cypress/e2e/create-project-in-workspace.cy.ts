@@ -35,7 +35,7 @@ describe('Create project in workspace', () => {
     function createProject(name: string) {
       projectNameInput().type(name);
       createProjectButton().click();
-      projectList().contains(name).click();
+      projectList().contains(name);
       projectNameInput().should('have.value', '');
     }
 
