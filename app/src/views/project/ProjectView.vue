@@ -4,6 +4,7 @@ import { IssueService } from '@/services/issue.service';
 import type { Issue } from '@/types/issue';
 import { ref } from 'vue';
 import CreateIssueForm from './CreateIssueForm.vue';
+import IssueList from './IssueList.vue';
 
 const props = defineProps<{
   projectId: number;
@@ -23,8 +24,6 @@ async function createIssue(formData: { title: string }) {
   <main>
     <h1>Project {{ projectId }}</h1>
     <CreateIssueForm @submit="createIssue" />
-    <ul data-testid="issue-list">
-      <li v-for="issue of issues" :key="issue.id">{{ issue.title }}</li>
-    </ul>
+    <IssueList :issues="issues" />
   </main>
 </template>
