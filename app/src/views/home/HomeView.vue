@@ -11,7 +11,7 @@ const workspaceService = useDependency(WorkspaceService);
 const workspaces = ref<Workspace[]>([]);
 
 async function createWorkspace(formData: { name: string }) {
-  const workspace = await workspaceService.createWorkspace(formData.name).then((res) => res.data);
+  const workspace = await workspaceService.createWorkspace(formData.name);
   workspaces.value.push(workspace);
 }
 </script>

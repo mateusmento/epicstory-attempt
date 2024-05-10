@@ -8,6 +8,6 @@ export class WorkspaceService {
   constructor(@InjectAxios() private axios: Axios) {}
 
   createWorkspace(name: string) {
-    return this.axios.post<Workspace>('/workspaces', { name });
+    return this.axios.post<Workspace>('/workspaces', { name }).then((res) => res.data);
   }
 }
