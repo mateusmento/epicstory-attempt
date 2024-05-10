@@ -21,11 +21,11 @@ async function createProject(formData: { name: string }) {
 </script>
 
 <template>
-  <div>
+  <main>
     <h1>Workspace {{ workspaceId }}</h1>
     <CreateProjectForm @submit="createProject" />
     <ProjectList :projects="projects" />
-  </div>
+  </main>
 </template>
 
 <style scoped></style>
