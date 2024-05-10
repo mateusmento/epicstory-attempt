@@ -1,3 +1,6 @@
+import { createWorkspace, workspaceList } from './home';
+import { createProject, expectProjectCreated } from './workspace';
+
 describe('Create project in workspace', () => {
   const API_URL = 'http://localhost:3000';
 
@@ -18,28 +21,17 @@ describe('Create project in workspace', () => {
 
     cy.visit('/');
 
-    const workspaceNameInput = () => cy.get('[data-testid="workspace-name-input"]');
-    const createWorkspaceButton = () => cy.get('[data-testid="create-workspace-button"');
-    const workspaceList = () => cy.get('[data-testid="workspace-list"]');
-
-    workspaceNameInput().type('Epicstory');
-    createWorkspaceButton().click();
+    createWorkspace('Epicstory');
     workspaceList().contains('Epicstory').click();
 
     cy.contains('Workspace 1');
 
-    const projectNameInput = () => cy.get('[data-testid="project-name-input"');
-    const createProjectButton = () => cy.get('[data-testid="create-project-button"');
-    const projectList = () => cy.get('[data-testid="project-list"]');
+    const projectName1 = 'Epicstory Api';
+    createProject(projectName1);
+    expectProjectCreated(projectName1);
 
-    function createProject(name: string) {
-      projectNameInput().type(name);
-      createProjectButton().click();
-      projectList().contains(name);
-      projectNameInput().should('have.value', '');
-    }
-
-    createProject('Epicstory Api');
-    createProject('Epicstory App');
+    const projectName2 = 'Epicstory App';
+    createProject(projectName2);
+    expectProjectCreated(projectName2);
   });
 });
