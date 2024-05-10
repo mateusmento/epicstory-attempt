@@ -1,4 +1,5 @@
 import { createWorkspace, workspaceList } from './home';
+import { interceptCreateWorkspaceEndpoint } from './intercepts';
 import { createIssue, expectIssueCreated } from './project';
 import { createProject, projectList } from './workspace';
 
@@ -6,9 +7,7 @@ describe('Create issue in project', () => {
   const API_URL = 'http://localhost:3000';
 
   it('should create issue in project', () => {
-    cy.intercept('POST', `${API_URL}/workspaces`, (req) => {
-      req.reply({ id: 1, name: req.body.name });
-    });
+    interceptCreateWorkspaceEndpoint();
 
     cy.intercept('POST', `${API_URL}/workspaces/1/projects`, (req) => {
       req.reply({ id: 1, workspaceId: 1, name: req.body.name });

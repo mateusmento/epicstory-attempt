@@ -1,13 +1,9 @@
 import { createWorkspace, expectWorkspaceCreated } from './home';
+import { interceptCreateWorkspaceEndpoint } from './intercepts';
 
 describe('Create workspace', () => {
-  const API_URL = 'http://localhost:3000';
-
   it('should create an workspace', () => {
-    let counter = 0;
-    cy.intercept('POST', `${API_URL}/workspaces`, (req) => {
-      req.reply({ id: counter++, name: req.body.name });
-    });
+    interceptCreateWorkspaceEndpoint();
 
     cy.visit('/');
     cy.contains('Workspaces');
