@@ -12,10 +12,12 @@ describe('Create workspace', () => {
     cy.visit('/');
     cy.contains('Workspaces');
 
-    createWorkspace('Epicstory');
-    expectWorkspaceCreated('Epicstory');
+    const workspaceName1 = 'Epicstory';
+    createWorkspace(workspaceName1);
+    expectWorkspaceCreated(workspaceName1);
 
-    createWorkspace('Derbel');
-    expectWorkspaceCreated('Derbel');
+    const workspaceName2 = 'Derbel';
+    createWorkspace(workspaceName2);
+    expectWorkspaceCreated(workspaceName2);
   });
 });
