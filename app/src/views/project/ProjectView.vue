@@ -1,14 +1,10 @@
 <script setup lang="ts">
+import type { Issue } from '@/types/issue';
 import { reactive, ref } from 'vue';
 
 defineProps<{
   projectId: number;
 }>();
-
-type Issue = {
-  id: number;
-  title: string;
-};
 
 const issues = ref<Issue[]>([]);
 
