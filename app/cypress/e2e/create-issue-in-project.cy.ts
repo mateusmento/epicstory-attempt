@@ -14,6 +14,12 @@ describe('Create issue in project', () => {
       });
     }
 
+    {
+      cy.intercept('POST', `${API_URL}/projects/1/issues`, (req) => {
+        req.reply({ id: 1, projectId: 1, title: req.body.title });
+      });
+    }
+
     cy.visit('/');
 
     const workspaceNameInput = () => cy.get('[data-testid="workspace-name-input"]');
