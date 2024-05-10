@@ -1,6 +1,6 @@
-const API_URL = 'http://localhost:3000';
-
 describe('Create workspace', () => {
+  const API_URL = 'http://localhost:3000';
+
   it('should create an workspace', () => {
     let counter = 0;
     cy.intercept('POST', `${API_URL}/workspaces`, (req) => {
