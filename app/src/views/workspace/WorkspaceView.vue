@@ -3,6 +3,7 @@ import { useDependency } from '@/core/dependency-injection';
 import { ProjectService } from '@/services/project.service';
 import type { Project } from '@/types/project';
 import { reactive, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const props = defineProps<{
   workspaceId: number;
@@ -31,7 +32,9 @@ async function createProject() {
       <button type="submit" data-testid="create-project-button">Create</button>
     </form>
     <ul data-testid="project-list">
-      <li v-for="project of projects" :key="project.id">{{ project.name }}</li>
+      <li v-for="project of projects" :key="project.id">
+        <RouterLink :to="`/project/${project.id}`">{{ project.name }}</RouterLink>
+      </li>
     </ul>
   </div>
 </template>
