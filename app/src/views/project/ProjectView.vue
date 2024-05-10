@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { useDependency } from '@/core/dependency-injection';
+import { IssueService } from '@/services/issue.service';
 import type { Issue } from '@/types/issue';
 import { reactive, ref } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   projectId: number;
 }>();
+
+const issueService = useDependency(IssueService);
 
 const issues = ref<Issue[]>([]);
 
@@ -12,12 +16,9 @@ const formData = reactive({
   title: '',
 });
 
-function createIssue() {
-  issues.value.push({
-    id: issues.value.reduce((maxId, iss) => Math.max(maxId, iss.id), 0) + 1,
-    title: formData.title,
-  });
-
+async function createIssue() {
+  const issue = await issueService.createIssue(props.projectId, formData.title);
+  issues.value.push(issue);
   formData.title = '';
 }
 </script>
