@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { useDependency } from '@/core/dependency-injection';
+import { ProjectService } from '@/services/project.service';
 import type { Project } from '@/types/project';
 import { reactive, ref } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   workspaceId: number;
 }>();
+
+const projectService = useDependency(ProjectService);
 
 const projects = ref<Project[]>([]);
 
@@ -12,12 +16,9 @@ const formData = reactive({
   name: '',
 });
 
-function createProject() {
-  const maxId = projects.value?.reduce((maxId, p) => Math.max(maxId, p.id), 0) + 1;
-  projects.value?.push({
-    id: maxId,
-    name: formData.name,
-  });
+async function createProject() {
+  const project = await projectService.createProject(props.workspaceId, formData.name);
+  projects.value?.push(project);
   formData.name = '';
 }
 </script>
