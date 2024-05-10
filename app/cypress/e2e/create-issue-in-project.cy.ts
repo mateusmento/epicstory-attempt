@@ -10,8 +10,9 @@ describe('Create issue in project', () => {
       req.reply({ id: 1, workspaceId: 1, name: req.body.name });
     });
 
+    let counter = 1;
     cy.intercept('POST', `${API_URL}/projects/1/issues`, (req) => {
-      req.reply({ id: 1, projectId: 1, title: req.body.title });
+      req.reply({ id: ++counter, projectId: 1, title: req.body.title });
     });
 
     cy.visit('/');
