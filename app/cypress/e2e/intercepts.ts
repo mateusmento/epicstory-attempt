@@ -13,3 +13,10 @@ export function interceptCreateProjectEndpoint() {
     req.reply({ id: counter++, workspaceId: 1, name: req.body.name });
   });
 }
+
+export function interceptCreateIssueEndpoint() {
+  let counter = 1;
+  cy.intercept('POST', `${API_URL}/projects/1/issues`, (req) => {
+    req.reply({ id: ++counter, projectId: 1, title: req.body.title });
+  });
+}
