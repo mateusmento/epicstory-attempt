@@ -14,11 +14,6 @@ const router = createRouter({
       props: true,
       component: () => import('@/views/workspace/WorkspaceView.vue'),
     },
-    {
-      path: '/foos',
-      name: 'foos',
-      component: () => import('@/views/FoosView.vue'),
-    },
   ],
 });
 
