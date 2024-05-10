@@ -21,8 +21,9 @@ describe('Create project in workspace', () => {
 
     cy.visit('/');
 
-    createWorkspace('Epicstory');
-    workspaceList().contains('Epicstory').click();
+    const workspaceName = 'Epicstory';
+    createWorkspace(workspaceName);
+    workspaceList().contains(workspaceName).click();
 
     cy.contains('Workspace 1');
 
