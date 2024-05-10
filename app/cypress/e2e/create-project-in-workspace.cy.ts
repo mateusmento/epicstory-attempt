@@ -1,5 +1,8 @@
 import { createWorkspace, workspaceList } from './page-objects/home';
-import { interceptCreateProjectEndpoint, interceptCreateWorkspaceEndpoint } from './intercepts';
+import {
+  interceptCreateProjectEndpoint,
+  interceptCreateWorkspaceEndpoint,
+} from './intercepts/intercepts';
 import { createProject, expectProjectCreated } from './page-objects/workspace';
 
 describe('Create project in workspace', () => {

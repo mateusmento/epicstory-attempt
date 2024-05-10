@@ -1,5 +1,5 @@
 import { createWorkspace, expectWorkspaceCreated } from './page-objects/home';
-import { interceptCreateWorkspaceEndpoint } from './intercepts';
+import { interceptCreateWorkspaceEndpoint } from './intercepts/intercepts';
 
 describe('Create workspace', () => {
   it('should create an workspace', () => {

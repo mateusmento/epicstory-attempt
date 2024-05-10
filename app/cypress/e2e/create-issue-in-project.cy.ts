@@ -3,7 +3,7 @@ import {
   interceptCreateIssueEndpoint,
   interceptCreateProjectEndpoint,
   interceptCreateWorkspaceEndpoint,
-} from './intercepts';
+} from './intercepts/intercepts';
 import { createIssue, expectIssueCreated } from './page-objects/project';
 import { createProject, projectList } from './page-objects/workspace';
 
