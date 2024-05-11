@@ -1,5 +1,9 @@
 const API_URL = 'http://localhost:3000';
 
+export function interceptAuthAccessEndpoint() {
+  cy.intercept('GET', `${API_URL}/auth/access`, { id: 1, name: 'Mateus Sarmento' });
+}
+
 export function interceptCreateWorkspaceEndpoint() {
   let counter = 1;
   cy.intercept('POST', `${API_URL}/workspaces`, (req) => {

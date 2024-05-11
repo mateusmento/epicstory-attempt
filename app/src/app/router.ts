@@ -9,6 +9,16 @@ const router = createRouter({
       component: () => import('@/views/home/HomeView.vue'),
     },
     {
+      path: '/signup',
+      name: 'singup',
+      component: () => import('@/views/signup/SignupView.vue'),
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: () => import('@/views/signin/SigninView.vue'),
+    },
+    {
       path: '/workspace/:workspaceId',
       name: 'workspace',
       props: true,
