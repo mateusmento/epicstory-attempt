@@ -5,6 +5,8 @@
     "isolatedModules": false,
     "target": "es5",
     "lib": ["es5", "dom"],
-    "types": ["cypress"]
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": ["cypress", "@simonsmith/cypress-image-snapshot/types"]
   }
 }
