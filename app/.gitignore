@@ -44,3 +44,5 @@ terraform-destroy
 # others
 
 /.ignore
+
+*storybook.log
