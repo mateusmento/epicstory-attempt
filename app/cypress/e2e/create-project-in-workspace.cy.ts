@@ -1,15 +1,20 @@
 import { createWorkspace, workspaceList } from './page-objects/home';
-import {
-  interceptCreateProjectEndpoint,
-  interceptCreateWorkspaceEndpoint,
-} from './intercepts/intercepts';
+import { mockCreateProjectEndpoint, mockCreateWorkspaceEndpoint } from './intercepts/intercepts';
 import { createProject, expectProjectCreated } from './page-objects/workspace';
+import { setupWorker } from 'msw/browser';
 
 describe('Create project in workspace', () => {
-  it('should create a project in workspace', () => {
-    interceptCreateWorkspaceEndpoint();
-    interceptCreateProjectEndpoint();
+  const worker = setupWorker(mockCreateWorkspaceEndpoint(), mockCreateProjectEndpoint());
 
+  beforeEach(() => {
+    worker.start({ quiet: true });
+  });
+
+  afterEach(() => {
+    worker.stop();
+  });
+
+  it('should create a project in workspace', () => {
     cy.visit('/');
 
     const workspaceName = 'Epicstory';

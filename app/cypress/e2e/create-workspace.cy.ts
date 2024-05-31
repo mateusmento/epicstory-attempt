@@ -1,10 +1,19 @@
 import { createWorkspace, expectWorkspaceCreated } from './page-objects/home';
-import { interceptCreateWorkspaceEndpoint } from './intercepts/intercepts';
+import { mockCreateWorkspaceEndpoint } from './intercepts/intercepts';
+import { setupWorker } from 'msw/browser';
 
 describe('Create workspace', () => {
-  it('should create an workspace', () => {
-    interceptCreateWorkspaceEndpoint();
+  const worker = setupWorker(mockCreateWorkspaceEndpoint());
 
+  beforeEach(() => {
+    worker.start({ quiet: true });
+  });
+
+  afterEach(() => {
+    worker.stop();
+  });
+
+  it('should create an workspace', () => {
     cy.visit('/');
     cy.contains('Workspaces');
 

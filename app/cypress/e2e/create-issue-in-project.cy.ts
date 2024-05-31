@@ -1,18 +1,29 @@
 import { createWorkspace, workspaceList } from './page-objects/home';
 import {
-  interceptCreateIssueEndpoint,
-  interceptCreateProjectEndpoint,
-  interceptCreateWorkspaceEndpoint,
+  mockCreateIssueEndpoint,
+  mockCreateProjectEndpoint,
+  mockCreateWorkspaceEndpoint,
 } from './intercepts/intercepts';
 import { createIssue, expectIssueCreated } from './page-objects/project';
 import { createProject, projectList } from './page-objects/workspace';
+import { setupWorker } from 'msw/browser';
 
 describe('Create issue in project', () => {
-  it('should create issue in project', () => {
-    interceptCreateWorkspaceEndpoint();
-    interceptCreateProjectEndpoint();
-    interceptCreateIssueEndpoint();
+  const worker = setupWorker(
+    mockCreateWorkspaceEndpoint(),
+    mockCreateProjectEndpoint(),
+    mockCreateIssueEndpoint(),
+  );
 
+  beforeEach(() => {
+    worker.start({ quiet: true });
+  });
+
+  afterEach(() => {
+    worker.stop();
+  });
+
+  it('should create issue in project', () => {
     cy.visit('/');
 
     const workspaceName = 'Epicstory';
