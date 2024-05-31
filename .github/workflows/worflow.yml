@@ -102,7 +102,8 @@ jobs:
       - name: Build and publish docker image
         run: |
           cd api
-          docker build -t epicstory-api .
+          NODE_VERSION=$(cat .nvmrc | sed 's/^v//')
+          docker build -t epicstory-api --build-arg NODE_VERSION=$NODE_VERSION .
           docker tag epicstory-api ${{ steps.login-ecr.outputs.registry }}/epicstory-api
           docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-api
   revert-api-deploy:
