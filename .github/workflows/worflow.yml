@@ -1,4 +1,4 @@
-name: Epicstory CI/CD
+name: Deploy Epicstory
 on:
   workflow_dispatch:
 jobs:
