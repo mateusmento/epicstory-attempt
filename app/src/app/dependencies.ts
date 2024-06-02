@@ -6,7 +6,7 @@ import { Axios } from 'axios';
 import { container as tsyringe } from 'tsyringe';
 
 export default async function createDependencies() {
-  const config = await import('./config');
+  const { default: config } = await import('./config');
   const axios = createAxios({ baseURL: config.API_URL });
   const container = tsyringe.createChildContainer();
   container.registerInstance(Axios, axios);
