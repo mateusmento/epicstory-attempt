@@ -1,0 +1,14 @@
+title: Create deployment strategy for epicstory app
+createdAt: 2024-04-18 13:05
+createdBy: omateusmento@gmail.com
+startedAt: 2024-04-20 09:04
+completedAt: 2024-04-20 11:28
+description: >
+  Create initial deployment strategy for epicstory app using terraform, AWS ECS instances and docker
+comments:
+  - createdBy: omateusmento@gmail.com
+    createdAt: 2024-04-20 11:27
+    content: >
+      Deployment strategy uses terraform to launch a ec2 instance and run a script to build and run a docker image.
+      The terraform script creates not only the instance but defines a security group for ports clients on port
+      80 and 22 (clients for http and ssh protocols) and a key for ssh connections.

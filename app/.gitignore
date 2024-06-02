@@ -29,3 +29,20 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# terraform files
+
+.terraform*
+terraform.*
+terraform-apply
+terraform-destroy
+
+# aws ssh keys
+/deploy/aws-epicstory.pem
+/deploy/aws-epicstory.pem.pub
+
+# others
+
+/.ignore
+
+*storybook.log

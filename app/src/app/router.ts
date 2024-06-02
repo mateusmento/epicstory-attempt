@@ -6,12 +6,29 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/HomeView.vue'),
+      component: () => import('@/views/home/HomeView.vue'),
     },
     {
-      path: '/foos',
-      name: 'foos',
-      component: () => import('@/views/FoosView.vue'),
+      path: '/signup',
+      name: 'singup',
+      component: () => import('@/views/signup/SignupView.vue'),
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: () => import('@/views/signin/SigninView.vue'),
+    },
+    {
+      path: '/workspace/:workspaceId',
+      name: 'workspace',
+      props: true,
+      component: () => import('@/views/workspace/WorkspaceView.vue'),
+    },
+    {
+      path: '/project/:projectId',
+      name: 'project',
+      props: true,
+      component: () => import('@/views/project/ProjectView.vue'),
     },
   ],
 });

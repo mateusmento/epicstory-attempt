@@ -16,4 +16,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames({ name }) {
+          return `assets/${name === 'config' ? name : name + '-[hash]'}.js`;
+        },
+      },
+    },
+  },
 });

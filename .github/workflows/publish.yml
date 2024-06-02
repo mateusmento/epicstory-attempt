@@ -1,0 +1,79 @@
+name: Epicstory CI/CD
+on:
+  workflow_dispatch:
+jobs:
+  test-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          cd app
+          npm ci
+      - name: Run unit tests
+        run: |
+          cd app
+          npm run test:unit
+  publish-app:
+    runs-on: ubuntu-latest
+    needs: test-app
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Login Docker to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ secrets.AWS_REGISTRY }}
+      - name: Build and publish docker image
+        run: |
+          cd app
+          NODE_VERSION=$(cat .nvmrc | sed 's/^v//')
+          docker build -t epicstory-app --build-arg NODE_VERSION=$NODE_VERSION .
+          docker tag epicstory-app ${{ steps.login-ecr.outputs.registry }}/epicstory-app
+          docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-app
+
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          cd api
+          npm ci
+      - name: Run unit tests
+        run: |
+          cd api
+          npm test
+  publish-api:
+    runs-on: ubuntu-latest
+    needs: test-api
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Login Docker to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ secrets.AWS_REGISTRY }}
+      - name: Build and publish docker image
+        run: |
+          cd api
+          NODE_VERSION=$(cat .nvmrc | sed 's/^v//')
+          docker build -t epicstory-api --build-arg NODE_VERSION=$NODE_VERSION .
+          docker tag epicstory-api ${{ steps.login-ecr.outputs.registry }}/epicstory-api
+          docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-api
