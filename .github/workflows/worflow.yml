@@ -1,7 +1,6 @@
 name: Epicstory CI/CD
 on:
-  push:
-    branches: main
+  workflow_dispatch:
 jobs:
   test-app:
     runs-on: ubuntu-latest
