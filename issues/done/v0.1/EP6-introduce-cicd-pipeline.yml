@@ -7,7 +7,7 @@ description: >
   by leverage the automation of terraform, it is still manual since I have to execute a terraform command.
   Also to build the application a docker image is being built and store inside the deployment ec2 instance
   instead of in separate locations where it can be built and store independently.
-  
+
   I want to introduce a CI/CD pipeline where a docker image is built for the application, stored in a image
   registry and deployed into a ec2 instance where the image is run.
 

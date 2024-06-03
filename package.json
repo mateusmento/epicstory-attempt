@@ -6,6 +6,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "format": "prettier --write \"./**/*.ts\" \"./**/*.js\" \"./**/*.vue\" \"./**/*.yml\" \"./**/*.json\" \"./**/.prettier\" \"./**/*.code-workspace\""
+  },
   "devDependencies": {
     "husky": "^9.0.11",
     "lint-staged": "^15.2.5",
