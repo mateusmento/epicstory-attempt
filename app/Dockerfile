@@ -1,7 +1,8 @@
-FROM node:20.12.0-bullseye-slim as build
+ARG NODE_IMAGE_VERSION
+ARG NGINX_IMAGE_VERSION
 
-ARG API_URL
-ENV VITE_API_URL=$API_URL
+FROM node:${NODE_IMAGE_VERSION} as build
+
 WORKDIR /home/node/app
 RUN chown node:node .
 USER node
@@ -11,8 +12,15 @@ COPY --chown=node:node . .
 ENV NODE_ENV=production
 RUN npm run build
 
-FROM nginx:1.24.0-bullseye as artifact
+FROM nginx:1.27.0 as artifact
 
-WORKDIR /usr/share/nginx/html/
-RUN rm -rf *
-COPY --from=build --chown=nginx:nginx /home/node/app/dist .
+WORKDIR /home/nginx
+COPY --chown=nginx:nginx docker-entrypoint.sh .
+RUN chmod +x docker-entrypoint.sh
+RUN rm /etc/nginx/conf.d/default.conf
+COPY --chown=nginx:nginx nginx.conf /etc/nginx/conf.d/app.conf
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=build --chown=nginx:nginx /home/node/app/dist /usr/share/nginx/html/app
+# USER nginx
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
+CMD [ "nginx", "-g", "daemon off;" ]
