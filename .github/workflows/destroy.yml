@@ -1,0 +1,46 @@
+name: Destroy Deployment
+on:
+  workflow_dispatch:
+    inputs:
+      deployment:
+        type: choice
+        options:
+          - app
+          - api
+          - load-balancer
+          - network
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Init terraform backend
+        run: |
+          cd deploy/${{ inputs.deployment }}
+          terraform init
+      - name: Destroy terraform plan (Network or Load Balancer)
+        if: inputs.deployment == 'network' || inputs.deployment == 'load-balancer'
+        run: |
+          cd deploy/${{ inputs.deployment }}
+          terraform detroy --auto-approve
+      - name: Deploy terraform plan (App or Api)
+        if: inputs.deployment == 'app' || inputs.deployment == 'api'
+        run: |
+          cd deploy/${{ inputs.deployment }}
+          terraform apply --auto-approve \
+            -var AWS_ACCESS_KEY_ID="" \
+            -var AWS_SECRET_ACCESS_KEY="" \
+            -var AWS_REGISTRY="" \
+            -var AWS_REGION=""
+            -var SERVICE_NAME="" \
+            -var SERVICE_VERSION="" \
+            -var LB_NAME_TAG=""
