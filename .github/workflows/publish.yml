@@ -14,7 +14,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Verify AWS region
-        run: aws configure get region
+        run: sudo aws configure get region
       - name: Login Docker to AWS ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
