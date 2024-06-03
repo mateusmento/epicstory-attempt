@@ -34,11 +34,10 @@ jobs:
           registries: ${{ secrets.AWS_REGISTRY }}
       - name: Build and publish docker image
         run: |
-          cd app
-          NODE_VERSION=$(cat .nvmrc | sed 's/^v//')
-          docker build -t epicstory-app --build-arg NODE_VERSION=$NODE_VERSION .
-          docker tag epicstory-app ${{ steps.login-ecr.outputs.registry }}/epicstory-app
-          docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-app
+          cd deploy
+          SERVICE_NAME=app
+          SERVICE_VERSION=0.0.1
+          ./publish.sh $SERVICE_NAME $SERVICE_VERSION
 
   test-api:
     runs-on: ubuntu-latest
@@ -72,8 +71,8 @@ jobs:
           registries: ${{ secrets.AWS_REGISTRY }}
       - name: Build and publish docker image
         run: |
-          cd api
-          NODE_VERSION=$(cat .nvmrc | sed 's/^v//')
-          docker build -t epicstory-api --build-arg NODE_VERSION=$NODE_VERSION .
-          docker tag epicstory-api ${{ steps.login-ecr.outputs.registry }}/epicstory-api
-          docker push ${{ steps.login-ecr.outputs.registry }}/epicstory-api
+          cd deploy
+          SERVICE_NAME=api
+          SERVICE_VERSION=0.0.1
+          sudo chmod +x publish.sh
+          ./publish.sh $SERVICE_NAME $SERVICE_VERSION
