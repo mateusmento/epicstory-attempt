@@ -7,7 +7,9 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "format": "prettier --write \"./**/*.ts\" \"./**/*.js\" \"./**/*.vue\" \"./**/*.yml\" \"./**/*.json\" \"./**/.prettier\" \"./**/*.code-workspace\""
+    "test:app": "cd app; npm run test:unit",
+    "test:api": "cd api; npm run test",
+    "format": "terraform fmt --recursive; prettier --write \"./**/*.ts\" \"./**/*.js\" \"./**/*.vue\" \"./**/*.yml\" \"./**/*.json\" \"./**/.prettierrc\" \"./**/*.code-workspace\""
   },
   "devDependencies": {
     "husky": "^9.0.11",
