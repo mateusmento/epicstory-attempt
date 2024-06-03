@@ -5,6 +5,9 @@ service_version=$2
 AWS_REGISTRY=$(aws sts get-caller-identity --query "Account" --output text | tr -d '\n')
 AWS_REGION=$(aws configure get region | tr -d '\n')
 
+echo "Registry: $AWS_REGISTRY"
+echo "Region: $AWS_REGION"
+
 # Creating AWS ECR repository
 aws ecr describe-repositories --repository-names "epicstory-$service_name" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
