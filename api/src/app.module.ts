@@ -6,6 +6,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { FooModule } from './foo/foo.module';
 import { DataSourceOptions } from 'typeorm';
 import { patch } from './lib/objects';
+import { WorkspaceModule } from './workspace/workspace.module';
 
 export function createAppModule(
   dataSourceOptions: Partial<DataSourceOptions> = {},
@@ -35,6 +36,7 @@ export function createAppModule(
       }),
       CqrsModule.forRoot(),
       FooModule,
+      WorkspaceModule,
     ],
   })
   class AppModule {}
