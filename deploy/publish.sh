@@ -2,7 +2,8 @@
 
 service_name=$1
 service_version=$2
-AWS_REGION=$(sudo aws configure get region | tr -d '\n')
+AWS_REGION=$3
+#(sudo aws configure get region | tr -d '\n')
 AWS_REGISTRY=$(aws sts get-caller-identity --query "Account" --output text | tr -d '\n')
 
 # Creating AWS ECR repository

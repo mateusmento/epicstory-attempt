@@ -23,4 +23,4 @@ jobs:
           cd deploy
           SERVICE_NAME=app
           SERVICE_VERSION=0.0.1
-          ./publish.sh $SERVICE_NAME $SERVICE_VERSION
+          ./publish.sh $SERVICE_NAME $SERVICE_VERSION ${{ secrets.AWS_REGION }}
