@@ -1,3 +1,10 @@
 {
-    "*.tf": "terraform fmt --recursive"
+  "*.ts": "prettier --write",
+  "*.js": "prettier --write",
+  "*.json": "prettier --write",
+  "*.yml": "prettier --write",
+  "*.ymal": "prettier --write",
+  "*.vue": "prettier --write",
+  "*.html": "prettier --write",
+  "*.tf": "terraform fmt --recursive"
 }
