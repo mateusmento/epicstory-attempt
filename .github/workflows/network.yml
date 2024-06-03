@@ -1,15 +1,6 @@
-name: Deploy Epicstory
+name: Deploy Network
 on:
   workflow_dispatch:
-    inputs:
-      service:
-        type: choice
-        required: true
-        options:
-          - app
-          - api
-      version:
-        required: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
