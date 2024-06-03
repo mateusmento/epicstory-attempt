@@ -8,10 +8,16 @@ terraform {
     }
   }
 
-  backend "local" {
-    workspace_dir = "../"
-    path          = "terraform.tfstate"
+  backend "s3" {
+    bucket = "epicstory-terraform"
+    key = "network/terraform.tfstate"
+    region = "sa-east-1"
   }
+
+  # backend "local" {
+  #   workspace_dir = "../"
+  #   path          = "terraform.tfstate"
+  # }
 }
 
 provider "aws" {
