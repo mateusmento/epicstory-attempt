@@ -27,12 +27,12 @@ jobs:
         run: |
           cd deploy/${{ inputs.deployment }}
           terraform init
-      - name: Destroy terraform plan (Network or Load Balancer)
+      - name: Destroy terraform plan (${{ inputs.deployment }})
         if: inputs.deployment == 'network' || inputs.deployment == 'load-balancer'
         run: |
           cd deploy/${{ inputs.deployment }}
           terraform destroy --auto-approve
-      - name: Deploy terraform plan (App or Api)
+      - name: Destroy terraform plan (${{ inputs.deployment }})
         if: inputs.deployment == 'app' || inputs.deployment == 'api'
         run: |
           cd deploy/${{ inputs.deployment }}

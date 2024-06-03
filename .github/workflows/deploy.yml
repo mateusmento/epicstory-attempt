@@ -30,12 +30,12 @@ jobs:
         run: |
           cd deploy/${{ inputs.deployment }}
           terraform init
-      - name: Deploy terraform plan (Network or Load Balancer)
+      - name: Deploy terraform plan (${{ inputs.deployment }})
         if: inputs.deployment == 'network' || inputs.deployment == 'load-balancer'
         run: |
           cd deploy/${{ inputs.deployment }}
           terraform apply --auto-approve
-      - name: Deploy terraform plan (App or Api)
+      - name: Deploy terraform plan (${{ inputs.deployment }}:${{ inputs.version }})
         if: inputs.deployment == 'app' || inputs.deployment == 'api'
         run: |
           cd deploy/${{ inputs.deployment }}
