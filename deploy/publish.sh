@@ -27,8 +27,6 @@ fi
 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin $repo_uri
 
 # Build and publish docker image
-WORK_DIR=../$service_name
-NODE_VERSION=$(cat $WORK_DIR/.nvmrc | sed 's/^v//')
-docker build -f $WORK_DIR/Dockerfile -t epicstory-$service_name:$service_version --build-arg NODE_VERSION=$NODE_VERSION $WORK_DIR
+../$service_name/docker-build.sh epicstory-$service_name $service_version
 docker tag epicstory-$service_name:$service_version $repo_uri:$service_version
 docker push $repo_uri:$service_version
