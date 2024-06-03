@@ -66,7 +66,7 @@ resource "aws_lb_target_group" "service" {
     unhealthy_threshold = 5
   }
   tags = {
-    Name = "fullstack-tg"
+    Name = "${var.name_tag}-tg"
   }
 }
 

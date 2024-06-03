@@ -26,7 +26,7 @@ provider "aws" {
 
 data "aws_vpc" "main" {
   tags = {
-    Name = "fullstack-vpc"
+    Name = "epicstory-vpc"
   }
 }
 
@@ -37,19 +37,19 @@ data "aws_subnets" "app" {
   }
 
   tags = {
-    Name = "fullstack-public-subnet"
+    Name = "epicstory-pub"
   }
 }
 
 data "aws_lb" "main" {
-  name = "fullstack-main-lb"
+  name = "epicstory-main-lb"
 }
 
 data "aws_lb_listener" "main" {
   load_balancer_arn = data.aws_lb.main.arn
   port              = 80
   tags = {
-    Name = "fullstack-lb-listener"
+    Name = "epicstory-lb-listener"
   }
 }
 
@@ -66,7 +66,7 @@ resource "aws_lb_listener_rule" "app" {
     target_group_arn = module.app.target_group.arn
   }
   tags = {
-    Name = "fullstack-app"
+    Name = "epicstory-app"
   }
 }
 
@@ -87,11 +87,11 @@ module "app" {
     LB_NAME_TAG           = var.LB_NAME_TAG,
   })
   key_name = "ec2-key"
-  name_tag = "fullstack-app"
+  name_tag = "epicstory-app"
 }
 
 resource "aws_security_group" "app" {
-  name   = "fullstack-app-sg"
+  name   = "epicstory-app-sg"
   vpc_id = data.aws_vpc.main.id
 
   ingress {
@@ -116,6 +116,6 @@ resource "aws_security_group" "app" {
   }
 
   tags = {
-    Name = "fullstack-app-sg"
+    Name = "epicstory-app-sg"
   }
 }

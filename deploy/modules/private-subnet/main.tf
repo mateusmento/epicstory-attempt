@@ -14,6 +14,10 @@ variable "nat_subnet_id" {
   type = string
 }
 
+variable "name_tag" {
+  type = string
+}
+
 data "aws_vpc" "main" {
   id = var.vpc_id
 }
@@ -28,14 +32,14 @@ resource "aws_subnet" "private" {
   cidr_block              = var.cidr_block
   map_public_ip_on_launch = false
   tags = {
-    Name = "fullstack-private-subnet"
+    Name = "${var.name_tag}"
   }
 }
 
 resource "aws_eip" "nat" {
   vpc = true
   tags = {
-    Name = "fulltstack-nat-eip"
+    Name = "${var.name_tag}-nat-eip"
   }
 }
 
@@ -43,7 +47,7 @@ resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
   subnet_id     = var.nat_subnet_id
   tags = {
-    Name = "fullstack-nat-gw"
+    Name = "${var.name_tag}-nat-gw"
   }
 }
 
@@ -54,7 +58,7 @@ resource "aws_route_table" "private" {
     cidr_block     = "0.0.0.0/0"
   }
   tags = {
-    Name = "fullstack-rt"
+    Name = "${var.name_tag}-rt"
   }
 }
 

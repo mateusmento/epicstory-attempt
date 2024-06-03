@@ -14,6 +14,10 @@ variable "internet_gateway_id" {
   type = string
 }
 
+variable "name_tag" {
+  type = string
+}
+
 data "aws_vpc" "main" {
   id = var.vpc_id
 }
@@ -28,7 +32,7 @@ resource "aws_subnet" "public" {
   availability_zone       = var.availability_zone
   map_public_ip_on_launch = true
   tags = {
-    Name = "fullstack-public-subnet"
+    Name = "${var.name_tag}"
   }
 }
 

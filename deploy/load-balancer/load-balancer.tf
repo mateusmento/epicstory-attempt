@@ -26,7 +26,7 @@ provider "aws" {
 
 data "aws_vpc" "main" {
   tags = {
-    Name = "fullstack-vpc"
+    Name = "epicstory-vpc"
   }
 }
 
@@ -37,24 +37,24 @@ data "aws_subnets" "public" {
   }
 
   tags = {
-    Name = "fullstack-public-subnet"
+    Name = "epicstory-pub"
   }
 }
 
 resource "aws_lb" "main" {
-  name                       = "fullstack-main-lb"
+  name                       = "epicstory-main-lb"
   internal                   = false
   load_balancer_type         = "application"
   enable_deletion_protection = false
   subnets                    = data.aws_subnets.public.ids
   security_groups            = [aws_security_group.lb-sg.id]
   tags = {
-    Name = "fullstack-main-lb"
+    Name = "epicstory-main-lb"
   }
 }
 
 resource "aws_security_group" "lb-sg" {
-  name   = "fullstack-lb-sg"
+  name   = "epicstory-lb-sg"
   vpc_id = data.aws_vpc.main.id
 
   ingress {
@@ -79,7 +79,7 @@ resource "aws_security_group" "lb-sg" {
   }
 
   tags = {
-    Name = "fullstack-public-sg"
+    Name = "epicstory-public-sg"
   }
 }
 
@@ -98,6 +98,6 @@ resource "aws_lb_listener" "main" {
   }
 
   tags = {
-    Name = "fullstack-lb-listener"
+    Name = "epicstory-lb-listener"
   }
 }

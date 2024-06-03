@@ -13,7 +13,7 @@ if { [ "$dir" == "app" ] || [ "$dir" == "api" ]; } && { [ "$1" == "apply" ] || [
     -var="AWS_REGISTRY=$(aws sts get-caller-identity --query "Account" --output text | tr -d '\n')" \
     -var="SERVICE_NAME=$service_name" \
     -var="SERVICE_VERSION=$service_version" \
-    -var="LB_NAME_TAG=fullstack-main-lb"
+    -var="LB_NAME_TAG=epicstory-main-lb"
 elif { [ "$1" == "apply" ] || [ "$1" == "destroy" ]; }; then
   subcommand=$1
   shift
