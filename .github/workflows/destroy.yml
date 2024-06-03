@@ -40,7 +40,7 @@ jobs:
             -var AWS_ACCESS_KEY_ID="" \
             -var AWS_SECRET_ACCESS_KEY="" \
             -var AWS_REGISTRY="" \
-            -var AWS_REGION=""
+            -var AWS_REGION="" \
             -var SERVICE_NAME="" \
             -var SERVICE_VERSION="" \
             -var LB_NAME_TAG=""
