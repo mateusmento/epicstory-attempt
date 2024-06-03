@@ -35,7 +35,7 @@ jobs:
         if: inputs.deployment == 'network' || inputs.deployment == 'load-balancer'
         run: |
           cd deploy/${{ inputs.deployment }}
-          terraform detroy --auto-approve
+          terraform apply --auto-approve
       - name: Deploy terraform plan (App or Api)
         if: inputs.deployment == 'app' || inputs.deployment == 'api'
         run: |
