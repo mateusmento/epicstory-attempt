@@ -27,7 +27,6 @@ jobs:
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
       - name: Init terraform backend
-        if: inputs.deployment == 'network' || inputs.deployment == 'load-balancer'
         run: |
           cd deploy/${{ inputs.deployment }}
           terraform init
