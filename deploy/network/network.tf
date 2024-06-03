@@ -54,7 +54,7 @@ module "public_subnet" {
   availability_zone   = local.availability_zones[count.index]
   cidr_block          = "10.0.${count.index * 2 + 1}.0/24"
   internet_gateway_id = aws_internet_gateway.igw.id
-  name_tag = "epicstory-pub"
+  name_tag            = "epicstory-pub"
 }
 
 module "private_subnet" {
@@ -64,5 +64,5 @@ module "private_subnet" {
   availability_zone = local.availability_zones[count.index]
   cidr_block        = "10.0.${count.index * 2 + 2}.0/24"
   nat_subnet_id     = module.public_subnet[count.index].subnet.id
-  name_tag = "epicstory-priv"
+  name_tag          = "epicstory-priv"
 }
