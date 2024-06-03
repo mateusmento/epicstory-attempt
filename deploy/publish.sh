@@ -7,6 +7,7 @@ AWS_REGION=$(aws configure get region | tr -d '\n')
 
 echo "Registry: $AWS_REGISTRY"
 echo "Region: $AWS_REGION"
+cat ~/.aws/config
 
 # Creating AWS ECR repository
 aws ecr describe-repositories --repository-names "epicstory-$service_name" > /dev/null 2>&1
@@ -14,6 +15,12 @@ if [ $? -ne 0 ]; then
     repo_uri=$(aws ecr create-repository \
         --repository-name "epicstory-$service_name" \
         --region ${AWS_REGION} \
+        --query 'repository.repositoryUri' \
+        --output text \
+        | tr -d '\n')
+else
+    repo_uri=$(aws ecr describe-repositories \
+        --repository-names "epicstory-$service_name" \
         --query 'repository.repositoryUri' \
         --output text \
         | tr -d '\n')
