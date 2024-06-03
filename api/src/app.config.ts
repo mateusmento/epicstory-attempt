@@ -3,12 +3,15 @@ import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class AppConfig {
   @IsNumber()
-  API_PORT: number = 3000;
+  API_PORT: number = process.env.NODE_ENV === 'production' ? 80 : 3000;
 
   @IsNotEmpty()
   DATABASE_NAME: string = 'epicstory';
 
   @IsNotEmpty()
   @Transform(({ value }) => value.split(',').map((v) => v.trim()))
-  CORS_ORIGINS: string[] = ['http://localhost:8080', 'http://localhost:4173'];
+  CORS_ORIGINS: string[] =
+    process.env.NODE_ENV === 'production'
+      ? []
+      : ['http://localhost:8080', 'http://localhost:4173'];
 }
