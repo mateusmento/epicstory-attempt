@@ -4,7 +4,7 @@ shift
 
 if { [ "$dir" == "app" ] || [ "$dir" == "api" ]; } && { [ "$1" == "apply" ] || [ "$1" == "destroy" ]; }; then
   subcommand=$1
-  service_name="fullstack-$dir"
+  service_name="epicstory-$dir"
   service_version=$2
   terraform -chdir="$dir" "$subcommand" --auto-approve \
     -var="AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id | tr -d '\n')" \
