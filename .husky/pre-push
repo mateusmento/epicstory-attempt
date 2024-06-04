@@ -3,15 +3,11 @@
 #.husky/test-api
 #.husky/test-app
 
-# Read the refs to be pushed from stdin
 while read local_ref local_sha remote_ref remote_sha
 do
-  # Check if the ref being pushed is a tag
   case "$local_ref" in refs/tags/*)
-    # Get the latest commit on the main branch
     latest_commit=$(git rev-parse main)
 
-    # Get the commit that the tag is pointing to
     tag_commit=$(git rev-parse "$local_sha")
 
     if [ "$latest_commit" != "$tag_commit" ]; then
