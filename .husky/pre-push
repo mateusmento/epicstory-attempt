@@ -1,3 +1,5 @@
-#!/bin/bash
-npm run test:app
-npm run test:api
+cd api
+npm run test
+
+cd ../app
+npm run test:unit
