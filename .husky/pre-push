@@ -1,5 +1,2 @@
-cd api
-npm run test
-
-cd ../app
-npm run test:unit
+.husky/test-api
+.husky/test-app
