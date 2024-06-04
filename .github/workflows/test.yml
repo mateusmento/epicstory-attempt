@@ -11,6 +11,8 @@ jobs:
       - run: node --version
       - run: npm install
       - uses: dcodeIO/setup-node-nvm@master
+        with:
+          node-version: v20.14.0
       - run: node --version
       - run: npm run test:unit
   test-api:
@@ -22,5 +24,7 @@ jobs:
       - run: node --version
       - run: npm install
       - uses: dcodeIO/setup-node-nvm@master
+        with:
+          node-version: v18.20.0
       - run: node --version
       - run: npm run test
