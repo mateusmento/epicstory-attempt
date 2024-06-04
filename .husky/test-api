@@ -1,2 +1,4 @@
 #!/bin/bash
-npm run test:api
+cd api
+nvm use
+npm run test

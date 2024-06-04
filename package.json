@@ -7,8 +7,6 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "test:app": "cd app; npm run test:unit",
-    "test:api": "cd api; npm run test",
     "format": "terraform fmt --recursive; prettier --write \"./**/*.ts\" \"./**/*.js\" \"./**/*.vue\" \"./**/*.yml\" \"./**/*.json\" \"./**/.prettierrc\" \"./**/*.code-workspace\""
   },
   "devDependencies": {
