@@ -13,7 +13,8 @@ jobs:
         run: |
           commit_sha=$(git rev-list -n 1 ${{ github.ref }})
           branches=$(git branch --contains $commit_sha)
-          if ! echo "$branches" | grep -q "main"; then
+          echo $branches | grep -q "main0" > /dev/null 2>&1
+          if [ $? -ne 0 ]; then
             echo "The last commit from the tag does not belong to main branch."
             exit 1
           fi
@@ -41,7 +42,8 @@ jobs:
         run: |
           commit_sha=$(git rev-list -n 1 ${{ github.ref }})
           branches=$(git branch --contains $commit_sha)
-          if ! echo "$branches" | grep -q "main"; then
+          echo $branches | grep -q "main0" > /dev/null 2>&1
+          if [ $? -ne 0 ]; then
             echo "The last commit from the tag does not belong to main branch."
             exit 1
           fi
