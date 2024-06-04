@@ -6,5 +6,7 @@
   "*.ymal": "prettier --write",
   "*.vue": "prettier --write",
   "*.html": "prettier --write",
-  "*.tf": "terraform fmt --recursive"
+  "*.tf": "terraform fmt --recursive",
+  "app/**/*": ".husky/test-app",
+  "api/**/*": ".husky/test-api"
 }
