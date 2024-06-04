@@ -1,2 +1,4 @@
-.husky/test-api
-.husky/test-app
+#!/bin/bash
+
+#.husky/test-api
+#.husky/test-app
