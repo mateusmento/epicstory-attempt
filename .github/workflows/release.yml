@@ -4,20 +4,26 @@ on:
     tags:
       - "v*"
 jobs:
-  publish-app:
+  test-app:
     runs-on: ubuntu-latest
     steps:
       - name: Chekout repository
         uses: actions/checkout@v4
-      - name: Determine branch from tag
+      - uses: actions/setup-node@v4
+        with:
+          node-version: v20.14.0
+      - run: node --version
+      - name: Test app
         run: |
-          tag_commit=$(git rev-parse ${GITHUB_REF#refs/tags/})
-          branches=$(git branch --contains $tag_commit)
-          echo $branches | grep -q "main" > /dev/null 2>&1
-          if [[ $? -ne 0 ]]; then
-            echo "The last commit from the tag does not belong to main branch."
-            exit 1
-          fi
+          cd app
+          npm install
+          npm run test:unit
+  publish-app:
+    runs-on: ubuntu-latest
+    needs: test-app
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
       - name: Configure AWS CLI
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -33,20 +39,26 @@ jobs:
         run: |
           cd deploy
           ./publish.sh app ${GITHUB_REF#refs/tags/v} ${{ secrets.AWS_REGION }}
-  publish-api:
+  test-api:
     runs-on: ubuntu-latest
     steps:
       - name: Chekout repository
         uses: actions/checkout@v4
-      - name: Determine branch from tag
+      - uses: actions/setup-node@v4
+        with:
+          node-version: v18.20.0
+      - run: node --version
+      - name: Test api
         run: |
-          tag_commit=$(git rev-parse ${GITHUB_REF#refs/tags/})
-          branches=$(git branch --contains $tag_commit)
-          echo $branches | grep -q "main" > /dev/null 2>&1
-          if [[ $? -ne 0 ]]; then
-            echo "The last commit from the tag does not belong to main branch."
-            exit 1
-          fi
+          cd api
+          npm install
+          npm run test
+  publish-api:
+    runs-on: ubuntu-latest
+    needs: test-api
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
       - name: Configure AWS CLI
         uses: aws-actions/configure-aws-credentials@v3
         with:
