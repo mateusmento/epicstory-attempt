@@ -11,10 +11,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Determine branch from tag
         run: |
-          commit_sha=$(git rev-list -n 1 ${{ github.ref }})
-          branches=$(git branch --contains $commit_sha)
+          tag_commit=$(git rev-parse ${GITHUB_REF#refs/tags/})
+          branches=$(git branch --contains $tag_commit)
           echo $branches | grep -q "main" > /dev/null 2>&1
-          if [ $? -ne 0 ]; then
+          if [[ $? -ne 0 ]]; then
             echo "The last commit from the tag does not belong to main branch."
             exit 1
           fi
@@ -40,10 +40,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Determine branch from tag
         run: |
-          commit_sha=$(git rev-list -n 1 ${{ github.ref }})
-          branches=$(git branch --contains $commit_sha)
+          tag_commit=$(git rev-parse ${GITHUB_REF#refs/tags/})
+          branches=$(git branch --contains $tag_commit)
           echo $branches | grep -q "main" > /dev/null 2>&1
-          if [ $? -ne 0 ]; then
+          if [[ $? -ne 0 ]]; then
             echo "The last commit from the tag does not belong to main branch."
             exit 1
           fi
