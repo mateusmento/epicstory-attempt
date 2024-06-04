@@ -1,0 +1,26 @@
+name: Test
+on:
+  push:
+jobs:
+  test-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
+      - run: cd app;
+      - run: node --version
+      - run: npm install
+      - uses: dcodeIO/setup-node-nvm@master
+      - run: node --version
+      - run: npm run test:unit
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chekout repository
+        uses: actions/checkout@v4
+      - run: cd api;
+      - run: node --version
+      - run: npm install
+      - uses: dcodeIO/setup-node-nvm@master
+      - run: node --version
+      - run: npm run test
