@@ -1,2 +1,25 @@
-.husky/test-api
-.husky/test-app
+#!/bin/bash
+
+#.husky/test-api
+#.husky/test-app
+
+remote_name=$1
+remote_url=$2
+
+# Read the refs to be pushed from stdin
+while read local_ref local_sha remote_ref remote_sha
+do
+  # Check if the ref being pushed is a tag
+  if [[ "$local_ref" =~ ^refs/tags/ ]]; then
+    # Get the latest commit on the main branch
+    latest_commit=$(git rev-parse main)
+
+    # Get the commit that the tag is pointing to
+    tag_commit=$(git rev-parse "$local_sha")
+
+    if [ "$latest_commit" != "$tag_commit" ]; then
+      echo "Error: You can only tag the latest commit on the main branch."
+      exit 1
+    fi
+  fi
+done
