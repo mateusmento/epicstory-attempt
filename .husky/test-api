@@ -1,4 +1,4 @@
 #!/bin/bash
 cd api
-nvm use
+# nvm use
 npm run test

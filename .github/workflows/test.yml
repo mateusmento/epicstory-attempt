@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Chekout repository
         uses: actions/checkout@v4
-      - uses: dcodeIO/setup-node-nvm@master
+      - uses: actions/setup-node@v4
         with:
           node-version: v20.14.0
       - run: node --version
@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Chekout repository
         uses: actions/checkout@v4
-      - uses: dcodeIO/setup-node-nvm@master
+      - uses: actions/setup-node@v4
         with:
           node-version: v18.20.0
       - run: node --version
