@@ -11,7 +11,8 @@ jobs:
         with:
           node-version: v20.14.0
       - run: node --version
-      - run: |
+      - name: Test app
+        run: |
           cd app
           npm install
           npm run test:unit
@@ -24,7 +25,8 @@ jobs:
         with:
           node-version: v18.20.0
       - run: node --version
-      - run: |
+      - name: Test api
+        run: |
           cd api
           npm install
           npm run test
