@@ -3,7 +3,7 @@ import { createProject, expectProjectCreated } from './page-objects/workspace';
 
 describe('Create project in workspace', () => {
   it('should create a project in workspace', () => {
-    cy.visit('/');
+    cy.visit('/app/');
 
     const workspaceName = 'Epicstory';
     createWorkspace(workspaceName);

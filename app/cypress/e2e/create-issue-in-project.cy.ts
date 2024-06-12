@@ -4,7 +4,7 @@ import { createProject, projectList } from './page-objects/workspace';
 
 describe('Create issue in project', () => {
   it('should create issue in project', () => {
-    cy.visit('/');
+    cy.visit('/app/');
 
     const workspaceName = 'Epicstory';
     createWorkspace(workspaceName);

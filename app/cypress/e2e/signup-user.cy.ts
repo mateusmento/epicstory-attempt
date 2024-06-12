@@ -3,7 +3,7 @@ import { signupUser } from './page-objects/signup';
 
 describe('Sign up a new user', () => {
   it('should sign up a new user', () => {
-    cy.visit('/signup');
+    cy.visit('/app/signup/');
 
     cy.contains('Sign up');
     cy.contains('Create an account');
