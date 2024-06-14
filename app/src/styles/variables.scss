@@ -1,0 +1,41 @@
+$th: 5px;
+$sm: 10px;
+$md: 15px;
+$lg: 25px;
+$xl: 40px;
+$xl2: 60px;
+$xl3: 80px;
+$xl4: 120px;
+
+$sizes:
+  'auto' auto,
+  th $th,
+  sm $sm,
+  md $md,
+  lg $lg,
+  xl $xl,
+  2xl $xl2,
+  3xl $xl3,
+  4xl $xl4;
+
+$sides:
+  t top,
+  b bottom,
+  l left,
+  r right;
+
+$alignments:
+  y block,
+  x inline;
+
+$black: #2a2a2a;
+$grey: #ddd;
+$light-grey: #ddd;
+
+$grey-blue: #dbd6e4;
+// $grey-blue: #f4f7ff;
+$dark-grey-blue: #5d5963;
+
+$light-blue: #aaa9ff;
+$blue: #3b37ff;
+$dark-blue: #2420e2;
