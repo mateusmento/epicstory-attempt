@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import { within, userEvent, expect } from '@storybook/test';
-import SignupView from '@/views/signup/SignupView.vue';
+import SignupView from '@/views/signup/index.vue';
 
 const meta = {
   title: 'Views/Signup',

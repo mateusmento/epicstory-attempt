@@ -6,7 +6,7 @@ describe('Sign up a new user', () => {
     cy.visit('/app/signup/');
 
     cy.contains('Sign up');
-    cy.contains('Create an account');
+    cy.contains('Start your journey with Epicstory.');
 
     const email = 'mateus@email.com';
     signupUser('Mateus Sarmento', email, 'admin123');

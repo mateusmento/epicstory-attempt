@@ -9,6 +9,14 @@ export function mockAuthAccessEndpoint() {
   });
 }
 
+export function mockSignupEndpoint() {
+  let counter = 1;
+  return http.post(`${API_URL}/auth/users`, async ({ request }) => {
+    const body: any = await request.json();
+    return HttpResponse.json({ id: counter++, ...body });
+  });
+}
+
 export function mockCreateWorkspaceEndpoint() {
   let counter = 1;
   return http.post(`${API_URL}/workspaces`, async ({ request }) => {
