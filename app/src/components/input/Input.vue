@@ -3,13 +3,12 @@ import { computed, inject, ref } from 'vue';
 
 const state = ref();
 
-const field = inject('field', {
-  get: () => state.value,
-  set: (value: any) => (state.value = value),
-});
+const field = inject('field') as any;
 
 const value = computed({
-  get: () => field.get(),
+  get: () => {
+    return field.get();
+  },
   set: (value: any) => {
     state.value = value;
     field.set(value);

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 import MyButton from './Button.vue';
-import MyForm from '@/components/Form.vue';
-import MyField from '@/components/Field.vue';
+import MyForm from '@/components/form/Form.vue';
+import MyField from '@/components/field/Field.vue';
 
 const meta: Meta<typeof MyButton> = {
   component: MyButton,

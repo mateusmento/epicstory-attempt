@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Button from '@/components/Button/Button.vue';
-import Field from '@/components/Field.vue';
-import Form from '@/components/Form.vue';
+import { Button } from '@/components/button';
+import { Field } from '@/components/field';
+import { Form } from '@/components/form';
 import { useDependency } from '@/core/dependency-injection';
 import { AuthApi } from '@/domain/auth/auth.api';
 import type { SignupRequest } from '@/domain/auth/dtos/signup.dto';

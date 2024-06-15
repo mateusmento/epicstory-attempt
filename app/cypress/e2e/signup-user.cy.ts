@@ -1,4 +1,4 @@
-import { signinEmailInput } from './page-objects/signin';
+import * as signin from './page-objects/signin';
 import { signupUser } from './page-objects/signup';
 
 describe('Sign up a new user', () => {
@@ -13,6 +13,6 @@ describe('Sign up a new user', () => {
 
     cy.contains('Sign in');
 
-    signinEmailInput().should('have.value', email);
+    signin.emailInput().should('have.value', email);
   });
 });

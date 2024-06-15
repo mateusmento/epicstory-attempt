@@ -9,6 +9,12 @@ export function mockAuthAccessEndpoint() {
   });
 }
 
+export function mockSigninEndpoint() {
+  return http.post(`${API_URL}/auth/token`, () => {
+    return HttpResponse.json({ token: '', user: {} });
+  });
+}
+
 export function mockSignupEndpoint() {
   let counter = 1;
   return http.post(`${API_URL}/auth/users`, async ({ request }) => {
