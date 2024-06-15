@@ -20,7 +20,7 @@ async function signup(data: SignupRequest) {
 <template>
   <main class="flex flex:center py-xl">
     <div class="signup h-screen w-xl rounded-lg flex:cols-md p-md">
-      <aside class="highlight-box flex:rows-auto w-md p-xl rounded-md">
+      <aside class="signup-advertisement highlight-box flex:rows-auto w-md p-xl rounded-md">
         <b class="logo-title mb-xl">Epicstory</b>
 
         <div class="flex:rows-md">
@@ -57,7 +57,7 @@ async function signup(data: SignupRequest) {
         </article>
       </aside>
 
-      <section class="flex:rows-3xl flex:center-y self:fill mx-2xl">
+      <section class="signup-form flex:rows-3xl flex:center-y self:fill mx-2xl">
         <div class="flex:rows-sm">
           <h2 class="title">Sign up</h2>
           <div class="subtitle">Start your journey with Epicstory.</div>
@@ -114,6 +114,9 @@ main {
   background-color: #fff;
 }
 
+.signup-form {
+  font-family: 'Inter';
+}
 .logo-title {
   font-size: 1.6em;
 }
