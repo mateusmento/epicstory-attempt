@@ -2,7 +2,7 @@
 import { computed, inject, provide, ref } from 'vue';
 import { Input } from '../input';
 import uniqid from 'uniqid';
-import { omit } from 'lodash';
+import { omit, pick } from 'lodash';
 
 defineOptions({
   inheritAttrs: false,
@@ -38,7 +38,7 @@ const fieldId = computed(() => uniqid(props.name ? props.name + '-' : ''));
 </script>
 
 <template>
-  <div class="field">
+  <div class="field" v-bind="pick($attrs, 'class', 'id') as any">
     <label v-if="label" :for="fieldId">{{ label }}</label>
     <slot>
       <Input v-bind="omit($attrs, 'class', 'id')" :id="fieldId" :class="classInput" />
