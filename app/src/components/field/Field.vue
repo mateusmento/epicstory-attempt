@@ -48,6 +48,6 @@ const fieldId = computed(() => uniqid(props.name ? props.name + '-' : ''));
 
 <style scoped>
 .field {
-  color: #aaa;
+  /* color: #aaa; */
 }
 </style>

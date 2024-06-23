@@ -5,6 +5,7 @@ import { Form } from '@/components/form';
 import { useDependency } from '@/core/dependency-injection';
 import { AuthApi } from '@/domain/auth/auth.api';
 import type { SignupRequest } from '@/domain/auth/dtos/signup.dto';
+import { vButton } from '@epicstory/ui';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -86,12 +87,17 @@ async function signup(data: SignupRequest) {
             placeholder="Create password"
             data-testid="signup-password-input"
           />
+
+          <div class="flex:cols-md mt-lg">
+            <vButton class="w-100" data-testid="signup-button2">Create account</vButton>
+          </div>
+
           <div class="flex:cols-md mt-lg">
             <Button
               type="submit"
               class="w-100"
               variant="special"
-              size="md"
+              size="sm"
               data-testid="signup-button"
               >Create account</Button
             >
@@ -117,6 +123,7 @@ main {
 .signup-form {
   font-family: 'Inter';
 }
+
 .logo-title {
   font-size: 1.6em;
 }

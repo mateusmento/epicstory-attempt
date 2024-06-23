@@ -4,15 +4,5 @@ import type { RequestHandler } from 'msw';
 
 export async function enableMocking() {
   const worker = setupWorker(...Object.values(mocks).map((mock) => mock() as RequestHandler));
-
-  await worker.start({
-    quiet: true,
-    onUnhandledRequest: 'bypass',
-    serviceWorker: {
-      url: '/app/mockServiceWorker.js',
-      options: {
-        scope: '/app/',
-      },
-    },
-  });
+  await worker.start({ quiet: true });
 }

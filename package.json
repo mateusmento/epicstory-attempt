@@ -12,6 +12,7 @@
     "design-system"
   ],
   "scripts": {
+    "app": "npm run -w=@epicstory/app --",
     "ui": "npm run -w=@epicstory/ui --",
     "format": "terraform fmt --recursive; prettier --write \"./**/*.ts\" \"./**/*.js\" \"./**/*.vue\" \"./**/*.yml\" \"./**/*.json\" \"./**/.prettierrc\" \"./**/*.code-workspace\""
   },

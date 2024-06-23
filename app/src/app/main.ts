@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import '@epicstory/ui/style';
 import '@/styles/main.scss';
 
 import { createApp } from 'vue';
@@ -6,13 +7,10 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
-import createDependencies from './dependencies';
+import { createDependencies } from './dependencies';
 import { createDependenciesPlugin } from '@/core/dependency-injection';
-import { enableMocking } from './enable-mocks';
 
 async function main() {
-  await enableMocking();
-
   const app = createApp(App);
 
   app.use(createPinia());

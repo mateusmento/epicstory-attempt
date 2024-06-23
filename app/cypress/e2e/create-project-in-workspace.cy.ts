@@ -1,9 +1,12 @@
+import { enableMocking, mocks } from './mocks';
 import { createWorkspace, workspaceList } from './page-objects/home';
 import { createProject, expectProjectCreated } from './page-objects/workspace';
 
 describe('Create project in workspace', () => {
+  enableMocking(mocks);
+
   it('should create a project in workspace', () => {
-    cy.visit('/app/');
+    cy.visit('/');
 
     const workspaceName = 'Epicstory';
     createWorkspace(workspaceName);

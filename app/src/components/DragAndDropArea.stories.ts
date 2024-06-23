@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 import DragAndDropArea from '../components/DragAndDropArea.vue';
 
 const meta = {
-  title: 'Components/DragAndDropArea.vue',
+  title: 'Demos/DragAndDropArea.vue',
   component: DragAndDropArea,
 } as Meta<typeof DragAndDropArea>;
 
