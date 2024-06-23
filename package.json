@@ -6,7 +6,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "workspaces": [
+    "api",
+    "app",
+    "design-system"
+  ],
   "scripts": {
+    "ui": "npm run -w=@epicstory/ui --",
     "format": "terraform fmt --recursive; prettier --write \"./**/*.ts\" \"./**/*.js\" \"./**/*.vue\" \"./**/*.yml\" \"./**/*.json\" \"./**/.prettierrc\" \"./**/*.code-workspace\""
   },
   "devDependencies": {

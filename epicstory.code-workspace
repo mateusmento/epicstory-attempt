@@ -17,6 +17,10 @@
       "path": "app",
     },
     {
+      "name": "design-system",
+      "path": "design-system",
+    },
+    {
       "name": "deploy",
       "path": "deploy",
     },
