@@ -39,7 +39,7 @@ const fieldId = computed(() => uniqid(props.name ? props.name + '-' : ''));
 
 <template>
   <div class="field" v-bind="pick($attrs, 'class', 'id') as any">
-    <label v-if="label" :for="fieldId">{{ label }}</label>
+    <label v-if="label" class="text-neutral-800" :for="fieldId">{{ label }}</label>
     <slot>
       <Input v-bind="omit($attrs, 'class', 'id')" :id="fieldId" :class="classInput" />
     </slot>

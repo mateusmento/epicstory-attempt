@@ -22,8 +22,6 @@ const props = withDefaults(
 </template>
 
 <style lang="scss" scoped>
-@import '@/styles/variables.scss';
-
 .button {
   font-weight: 600;
   border-color: var(--border-color);
@@ -48,9 +46,9 @@ const props = withDefaults(
 
 .button--sm {
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 0.9rem;
-  outline-width: 2px;
+  outline-width: 3px;
 }
 
 .button--md {
@@ -75,7 +73,7 @@ const props = withDefaults(
 .button--default {
   --border-color: #ccc;
   --bg-color: #fff;
-  --text-color: #{$black};
+  --text-color: var(--black);
   --active-color: #f6f6f6;
 
   outline-color: #dedede;
@@ -91,8 +89,8 @@ const props = withDefaults(
 .button--primary,
 .button--special {
   --text-color: white;
-  --border-color: #{$blue};
-  --bg-color: #{$blue};
+  --border-color: var(--blue);
+  --bg-color: var(--blue);
   --active-color: #3734f1;
 
   outline-color: #c4d5ff;
@@ -109,17 +107,17 @@ const props = withDefaults(
 .button--special {
   &:is(.button--th, .button--sm) {
     box-shadow: inset 0 0px 0px 1px #577fff;
-    border: 1px solid $blue;
+    border: 1px solid var(--blue);
   }
 
   &:is(.button--md, .button--lg) {
     box-shadow: inset 0 0px 0px 2px #577fff;
-    border: 1px solid $blue;
+    border: 1px solid var(--blue);
   }
 
   &.button--xl {
     box-shadow: inset 0 1px 1px 2px #3f6cff;
-    border: 2px solid $blue;
+    border: 2px solid var(--blue);
   }
 
   &:active {

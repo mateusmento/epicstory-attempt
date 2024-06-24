@@ -15,6 +15,7 @@ const meta: Meta<typeof MyButton> = {
     title: {
       control: { type: 'text' },
     },
+    size: { control: 'select', options: ['th', 'sm', 'md', 'lg', 'xl'] },
     variant: {
       control: { type: 'radio' },
       options: ['default', 'primary', 'special'],

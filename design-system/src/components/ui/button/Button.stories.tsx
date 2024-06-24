@@ -7,7 +7,25 @@ const meta = {
   render: (args) => ({
     components: { vButton },
     render() {
-      return <vButton {...args}>Click me</vButton>
+      return (
+        <div class="flex flex-cols gap-3 items-center">
+          <vButton {...args} size="xs">
+            extra small
+          </vButton>
+          <vButton {...args} size="sm">
+            small
+          </vButton>
+          <vButton {...args} size="default">
+            default
+          </vButton>
+          <vButton {...args} size="lg">
+            really large
+          </vButton>
+          <vButton {...args} size="xl">
+            extra extra lage
+          </vButton>
+        </div>
+      )
     }
   }),
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
@@ -28,6 +46,14 @@ type Story = StoryObj<typeof meta>
  * See https://storybook.js.org/docs/api/csf
  * to learn how to use render functions.
  */
-export const Primary: Story = {
-  args: {}
+export const Red: Story = {
+  args: {
+    class: 'bg-red-600 text-orange-100'
+  }
+}
+
+export const Destructive: Story = {
+  args: {
+    variant: 'destructive'
+  }
 }

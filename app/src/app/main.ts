@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import '@epicstory/ui/style';
-import '@/styles/main.scss';
+import '@/styles/main.css';
+import '@epicstory/ui/style.css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';

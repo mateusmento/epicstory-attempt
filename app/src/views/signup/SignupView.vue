@@ -2,6 +2,7 @@
 import { Button } from '@/components/button';
 import { Field } from '@/components/field';
 import { Form } from '@/components/form';
+import IconGoogle from '@/components/icons/IconGoogle.vue';
 import { useDependency } from '@/core/dependency-injection';
 import { AuthApi } from '@/domain/auth/auth.api';
 import type { SignupRequest } from '@/domain/auth/dtos/signup.dto';
@@ -19,26 +20,28 @@ async function signup(data: SignupRequest) {
 </script>
 
 <template>
-  <main class="flex flex:center py-xl">
-    <div class="signup h-screen w-xl rounded-lg flex:cols-md p-md">
-      <aside class="signup-advertisement highlight-box flex:rows-auto w-md p-xl rounded-md">
-        <b class="logo-title mb-xl">Epicstory</b>
+  <main class="flex flex:center h-screen py-4xl">
+    <div class="signup w-xl h-full rounded-3xl flex:cols-md p-xl">
+      <aside class="signup-advertisement highlight-box flex:rows-auto w-md rounded-xl">
+        <div class="m-4xl">
+          <b class="block logo-title mb-4xl">Epicstory</b>
 
-        <div class="flex:rows-md">
-          <h1 class="headline_title">
-            Create epic<br />
-            stories with us.
-          </h1>
-          <p class="headline_subtitle">
-            Discover a better communication<br />
-            tool for Scrum teams.
-          </p>
+          <div class="flex:rows-3xl">
+            <h1 class="headline_title">
+              Create epic<br />
+              stories with us.
+            </h1>
+            <p class="headline_subtitle">
+              Discover a better communication<br />
+              tool for Scrum teams.
+            </p>
+          </div>
         </div>
 
         <div class="flex:space"></div>
         <div class="flex:space"></div>
 
-        <article class="testimony">
+        <article class="testimony m-2xl">
           <p>
             It's simply wonderful to still be aligned with Scrum values when communicating remotely.
             Epicstory helped our teams to best perform when fast communication is required.
@@ -58,29 +61,40 @@ async function signup(data: SignupRequest) {
         </article>
       </aside>
 
-      <section class="signup-form flex:rows-3xl flex:center-y self:fill mx-2xl">
-        <div class="flex:rows-sm">
-          <h2 class="title">Sign up</h2>
-          <div class="subtitle">Start your journey with Epicstory.</div>
+      <section class="signup-form flex:rows-7xl flex:center-y self:fill mx-6xl">
+        <div class="flex:rows-xl">
+          <h2 class="title text-neutral-800">Sign up</h2>
+          <div class="subtitle text-neutral-600">Start your journey with Epicstory.</div>
         </div>
 
-        <Form class="flex:rows-lg" @submit="signup" data-testid="signup-form">
+        <Form class="flex:rows-3xl" @submit="signup" data-testid="signup-form">
+          <vButton class="flex:cols-lg w-full" data-testid="signup-with-google">
+            <IconGoogle class="h-8" />
+            Sign up with Google
+          </vButton>
+
+          <div class="flex:cols-2xl flex:center text-slate-800">
+            <div class="border border-solid border-slate-200 flex-1"></div>
+            or
+            <div class="border border-solid border-slate-200 flex-1"></div>
+          </div>
+
           <Field
-            class="flex:rows-sm"
+            class="flex:rows-xl"
             label="Name"
             name="name"
             placeholder="name"
             data-testid="signup-name-input"
           />
           <Field
-            class="flex:rows-sm"
+            class="flex:rows-xl"
             label="Email"
             name="email"
             placeholder="Enter your email"
             data-testid="signup-email-input"
           />
           <Field
-            class="flex:rows-sm"
+            class="flex:rows-xl"
             type="password"
             label="Password"
             name="password"
@@ -88,14 +102,10 @@ async function signup(data: SignupRequest) {
             data-testid="signup-password-input"
           />
 
-          <div class="flex:cols-md mt-lg">
-            <vButton class="w-100" data-testid="signup-button2">Create account</vButton>
-          </div>
-
-          <div class="flex:cols-md mt-lg">
+          <div class="flex:rows-2xl mt-3xl">
             <Button
               type="submit"
-              class="w-100"
+              class="w-full"
               variant="special"
               size="sm"
               data-testid="signup-button"
@@ -109,8 +119,6 @@ async function signup(data: SignupRequest) {
 </template>
 
 <style lang="scss" scoped>
-@import '@/styles/variables.scss';
-
 main {
   background-color: #e3e8f8;
   font-family: 'Plus Jakarta Sans';
@@ -142,7 +150,7 @@ main {
   grid-template-rows: auto auto;
   gap: 20px;
 
-  background-color: #{$dark-blue};
+  background-color: var(--dark-blue);
   padding: 20px;
   border-radius: 10px;
   font-family: 'Lato';

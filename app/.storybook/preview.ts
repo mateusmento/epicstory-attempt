@@ -1,8 +1,10 @@
-import { setup, type Preview } from '@storybook/vue3';
-import '@epicstory/ui/style.css';
-import '../src/styles/main.scss';
-import './fonts.css';
 import 'reflect-metadata';
+
+import '@/styles/main.css';
+import '@epicstory/ui/style.css';
+import './fonts.css';
+
+import { setup, type Preview } from '@storybook/vue3';
 import { createDependencies } from '../src/app/dependencies';
 import { createDependenciesPlugin } from '../src/core/dependency-injection';
 

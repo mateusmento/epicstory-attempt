@@ -13,6 +13,16 @@
   justify-content: center;
 }
 
+.flex {
+  &.flex\:center-x {
+    justify-content: center;
+  }
+
+  &.flex\:center-y {
+    align-items: center;
+  }
+}
+
 .flex\:rows {
   flex-direction: column;
 
