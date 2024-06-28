@@ -3,7 +3,6 @@ import { TypedConfigModule, dotenvLoader } from 'nest-typed-config';
 import { AppConfig } from './app.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CqrsModule } from '@nestjs/cqrs';
-import { FooModule } from './foo/foo.module';
 import { DataSourceOptions } from 'typeorm';
 import { patch } from './lib/objects';
 import { WorkspaceModule } from './workspace/workspace.module';
@@ -35,7 +34,6 @@ export function createAppModule(
           ),
       }),
       CqrsModule.forRoot(),
-      FooModule,
       WorkspaceModule,
     ],
   })
