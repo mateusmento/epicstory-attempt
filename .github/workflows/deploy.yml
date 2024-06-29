@@ -44,6 +44,9 @@ jobs:
             -var AWS_SECRET_ACCESS_KEY="${{secrets.AWS_SECRET_ACCESS_KEY}}" \
             -var AWS_REGISTRY="${{secrets.AWS_REGISTRY}}" \
             -var AWS_REGION="${{secrets.AWS_REGION}}" \
+            -var GOOGLE_CLIENT_ID="${{secrets.GOOGLE_CLIENT_ID}}" \
+            -var GOOGLE_CLIENT_SECRET="${{secrets.GOOGLE_CLIENT_SECRET}}" \
+            -var GOOGLE_REDIRECT_URI="${{secrets.GOOGLE_REDIRECT_URI}}" \
             -var SERVICE_NAME="epicstory-${{ inputs.deployment }}" \
             -var SERVICE_VERSION="${{ inputs.version }}" \
             -var LB_NAME_TAG="epicstory-main-lb"
