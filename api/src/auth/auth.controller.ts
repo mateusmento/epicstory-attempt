@@ -14,6 +14,6 @@ export class AuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    res.redirect(`/signin`);
+    res.redirect(`http://localhost:8080/signin`);
   }
 }

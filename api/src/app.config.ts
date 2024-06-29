@@ -11,9 +11,6 @@ export class AppConfig {
   @IsNotEmpty()
   GOOGLE_REDIRECT_URI: string;
 
-  @IsNotEmpty()
-  TRUST_PROXY: string;
-
   @IsNumber()
   @Transform(({ value }) => +value)
   API_PORT: number = process.env.NODE_ENV === 'production' ? 80 : 3000;

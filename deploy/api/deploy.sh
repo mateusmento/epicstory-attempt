@@ -63,4 +63,8 @@ IMAGE_NAME=${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/${SERVICE_NAME}:$
 echo "Run application"
 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin $IMAGE_NAME
 
-docker run -it -d --rm -p 80:80 $IMAGE_NAME
+docker run -it -d --rm -p 80:80 \
+  -e GOOGLE_CLIENT_ID="${GOOGLE_CLIENT_ID}" \
+  -e GOOGLE_CLIENT_SECRET="${GOOGLE_CLIENT_SECRET}" \
+  -e GOOGLE_REDIRECT_URI="$APP_LB_URL/${GOOGLE_REDIRECT_PATH}" \
+  $IMAGE_NAME

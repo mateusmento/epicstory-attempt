@@ -10,7 +10,7 @@ async function bootstrap() {
 
   const config = app.get(AppConfig);
 
-  app.getHttpAdapter().getInstance().set('trust proxy', config.TRUST_PROXY);
+  // app.getHttpAdapter().getInstance().set('trust proxy', 2);
 
   app.enableCors({
     origin: config.CORS_ORIGINS,
