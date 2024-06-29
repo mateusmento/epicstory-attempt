@@ -32,7 +32,7 @@ main {
   height: 126px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 8px;
+  padding: 12px;
   background-color: white;
   font-size: 0.8rem;
 }

@@ -7,11 +7,18 @@ import { useDependency } from '@/core/dependency-injection';
 import { AuthApi } from '@/domain/auth/auth.api';
 import type { SignupRequest } from '@/domain/auth/dtos/signup.dto';
 import { vButton } from '@epicstory/ui';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
 const authApi = useDependency(AuthApi);
+
+const apiUrl = ref<string>();
+
+onMounted(async () => {
+  apiUrl.value = (await import('@/app/config')).default.API_URL;
+});
 
 async function signup(data: SignupRequest) {
   const user = await authApi.signup(data);
@@ -24,10 +31,10 @@ async function signup(data: SignupRequest) {
     <div class="signup w-xl h-full rounded-3xl flex:cols-md p-xl">
       <aside class="signup-advertisement highlight-box flex:rows-auto w-md rounded-xl">
         <div class="m-4xl">
-          <b class="block logo-title mb-4xl">Epicstory</b>
+          <b class="block logo-title font-semibold mb-4xl">Epicstory</b>
 
           <div class="flex:rows-3xl">
-            <h1 class="headline_title">
+            <h1 class="headline_title font-semibold">
               Create epic<br />
               stories with us.
             </h1>
@@ -68,17 +75,6 @@ async function signup(data: SignupRequest) {
         </div>
 
         <Form class="flex:rows-3xl" @submit="signup" data-testid="signup-form">
-          <vButton class="flex:cols-lg w-full" data-testid="signup-with-google">
-            <IconGoogle class="h-8" />
-            Sign up with Google
-          </vButton>
-
-          <div class="flex:cols-2xl flex:center text-slate-800">
-            <div class="border border-solid border-slate-200 flex-1"></div>
-            or
-            <div class="border border-solid border-slate-200 flex-1"></div>
-          </div>
-
           <Field
             class="flex:rows-xl"
             label="Name"
@@ -103,15 +99,26 @@ async function signup(data: SignupRequest) {
           />
 
           <div class="flex:rows-2xl mt-3xl">
-            <Button
-              type="submit"
-              class="w-full"
-              variant="special"
-              size="sm"
-              data-testid="signup-button"
-              >Create account</Button
-            >
+            <Button type="submit" variant="invitational" class="w-full" data-testid="signup-button">
+              Create account
+            </Button>
           </div>
+
+          <div class="flex:cols-2xl flex:center text-slate-800">
+            <div class="border border-solid border-slate-200 flex-1"></div>
+            or
+            <div class="border border-solid border-slate-200 flex-1"></div>
+          </div>
+
+          <vButton
+            as="a"
+            :href="`${apiUrl}/auth/google/login`"
+            class="flex:cols-lg w-full"
+            data-testid="signup-with-google"
+          >
+            <IconGoogle class="h-8" />
+            Sign up with Google
+          </vButton>
         </Form>
       </section>
     </div>

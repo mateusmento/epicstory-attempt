@@ -38,6 +38,7 @@ input,
 textarea,
 select {
   padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 6px;
 
   transition: outline 3ms;
@@ -67,6 +68,6 @@ button,
 input[type='button'],
 input[type='reset'],
 input[type='submit'] {
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 6px 12px;
+  border-radius: 6px;
 }

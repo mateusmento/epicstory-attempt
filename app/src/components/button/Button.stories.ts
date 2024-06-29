@@ -18,7 +18,7 @@ const meta: Meta<typeof MyButton> = {
     size: { control: 'select', options: ['th', 'sm', 'md', 'lg', 'xl'] },
     variant: {
       control: { type: 'radio' },
-      options: ['default', 'primary', 'special'],
+      options: ['default', 'primary', 'invitational'],
     },
   },
 };
@@ -65,9 +65,9 @@ export const PrimaryVariant: Story = {
   }),
 };
 
-export const SpecialVariant: Story = {
+export const invitationalVariant: Story = {
   args: {
-    variant: 'special',
+    variant: 'invitational',
   },
   render: (args) => ({
     components: { MyButton },

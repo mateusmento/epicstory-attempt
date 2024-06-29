@@ -58,7 +58,7 @@ resource "aws_lb_listener_rule" "app" {
   priority     = 1
   condition {
     path_pattern {
-      values = ["/app*"]
+      values = ["/*"]
     }
   }
   action {
