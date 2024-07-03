@@ -1,7 +1,7 @@
 ARG NODE_IMAGE_VERSION
 ARG NGINX_IMAGE_VERSION
 
-FROM node:${NODE_IMAGE_VERSION} as build
+FROM node:${NODE_IMAGE_VERSION} AS build
 
 WORKDIR /home/node/app
 RUN chown node:node .
@@ -12,7 +12,7 @@ COPY --chown=node:node . .
 ENV NODE_ENV=production
 RUN npm run build
 
-FROM nginx:1.27.0 as artifact
+FROM nginx:${NGINX_IMAGE_VERSION} AS artifact
 
 WORKDIR /home/nginx
 COPY --chown=nginx:nginx docker-entrypoint.sh .

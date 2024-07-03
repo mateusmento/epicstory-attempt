@@ -1,6 +1,6 @@
 ARG NODE_IMAGE_VERSION
 
-FROM node:${NODE_IMAGE_VERSION} as build
+FROM node:${NODE_IMAGE_VERSION} AS build
 
 # RUN apt-get update -y && apt-get install python3 make g++ -y
 WORKDIR /home/node/app
@@ -11,7 +11,7 @@ RUN npm ci
 COPY --chown=node:node . .
 RUN npm run build
 
-FROM node:${NODE_IMAGE_VERSION} as artifact
+FROM node:${NODE_IMAGE_VERSION} AS artifact
 
 RUN apt-get update && apt-get install -y dumb-init && apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /home/node/app
