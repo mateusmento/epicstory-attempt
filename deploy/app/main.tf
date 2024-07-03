@@ -55,7 +55,7 @@ data "aws_lb_listener" "main" {
 
 resource "aws_lb_listener_rule" "app" {
   listener_arn = data.aws_lb_listener.main.arn
-  priority     = 1
+  priority     = 2
   condition {
     path_pattern {
       values = ["/*"]
