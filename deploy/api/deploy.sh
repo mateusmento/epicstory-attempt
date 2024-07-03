@@ -63,6 +63,11 @@ IMAGE_NAME=${AWS_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/${SERVICE_NAME}:$
 echo "Run application"
 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin $IMAGE_NAME
 
+echo ""
+echo "callback uri $APP_LB_URL/${GOOGLE_CALLBACK_URI}"
+echo "redirect url $APP_LB_URL/${GOOGLE_APP_REDIRECT_URL}"
+echo ""
+
 docker run -it -d --rm -p 80:80 \
   -e GOOGLE_CLIENT_ID="${GOOGLE_CLIENT_ID}" \
   -e GOOGLE_CLIENT_SECRET="${GOOGLE_CLIENT_SECRET}" \
