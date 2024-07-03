@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 import '@/styles/main.css';
-import '@epicstory/ui/style.css';
+import '@mateussarmento/epicstory-ui/style.css';
 import './fonts.css';
 
 import { setup, type Preview } from '@storybook/vue3';

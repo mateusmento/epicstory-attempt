@@ -13,7 +13,7 @@ const route = useRoute();
 
 const authApi = useDependency(AuthApi);
 
-const signinEmail = ref(route.query.email);
+const signinEmail = ref<string>(typeof route.query.email === 'string' ? route.query.email : '');
 
 async function signin(data: SigninRequest) {
   await authApi.signin(data);
@@ -24,7 +24,7 @@ async function signin(data: SigninRequest) {
 <template>
   <main>
     <h1>Sign in</h1>
-    <h2>Make stories with us.</h2>
+    <h2>Continue your journey with Epicstory.</h2>
     <Form @submit="signin">
       <Field v-model="signinEmail" label="Email" name="email" data-testid="signin-email-input" />
       <Field label="Password" name="password" data-testid="signin-password-input" />

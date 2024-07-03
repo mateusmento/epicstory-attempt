@@ -1,19 +1,23 @@
 import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { GoogleAuthGuard } from './utils/google.auth-guard';
 import { Request, Response } from 'express';
+import { AppConfig } from 'src/app.config';
 
 @Controller('/auth')
 export class AuthController {
-  @Get('/google/login')
-  @UseGuards(GoogleAuthGuard)
-  login() {}
+  constructor(private config: AppConfig) {}
 
-  @Get('/google/redirect')
+  @Get('/google')
   @UseGuards(GoogleAuthGuard)
-  googleRedirect(
+  google() {}
+
+  @Get('/google/callback')
+  @UseGuards(GoogleAuthGuard)
+  googleCallback(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    res.redirect(`http://localhost:8080/signin`);
+    console.log('redirect', req.user);
+    res.redirect(this.config.GOOGLE_APP_REDIRECT_URL);
   }
 }

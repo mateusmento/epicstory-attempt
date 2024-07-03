@@ -6,7 +6,7 @@ import IconGoogle from '@/components/icons/IconGoogle.vue';
 import { useDependency } from '@/core/dependency-injection';
 import { AuthApi } from '@/domain/auth/auth.api';
 import type { SignupRequest } from '@/domain/auth/dtos/signup.dto';
-import { vButton } from '@epicstory/ui';
+import { vButton } from '@mateussarmento/epicstory-ui';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -112,7 +112,7 @@ async function signup(data: SignupRequest) {
 
           <vButton
             as="a"
-            :href="`${apiUrl}/auth/google/login`"
+            :href="`${apiUrl}/auth/google`"
             class="flex:cols-lg w-full"
             data-testid="signup-with-google"
           >

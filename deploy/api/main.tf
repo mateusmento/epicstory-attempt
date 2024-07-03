@@ -79,13 +79,17 @@ module "api" {
   subnet_ids        = data.aws_subnets.api.ids
   security_group_id = aws_security_group.api.id
   user_data = templatefile("./deploy.sh", {
-    AWS_ACCESS_KEY_ID     = var.AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY = var.AWS_SECRET_ACCESS_KEY,
-    AWS_REGION            = var.AWS_REGION,
-    AWS_REGISTRY          = var.AWS_REGISTRY,
-    SERVICE_NAME          = var.SERVICE_NAME,
-    SERVICE_VERSION       = var.SERVICE_VERSION,
-    LB_NAME_TAG           = var.LB_NAME_TAG,
+    AWS_ACCESS_KEY_ID       = var.AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY   = var.AWS_SECRET_ACCESS_KEY,
+    AWS_REGION              = var.AWS_REGION,
+    AWS_REGISTRY            = var.AWS_REGISTRY,
+    SERVICE_NAME            = var.SERVICE_NAME,
+    SERVICE_VERSION         = var.SERVICE_VERSION,
+    LB_NAME_TAG             = var.LB_NAME_TAG,
+    GOOGLE_CLIENT_ID        = var.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET    = var.GOOGLE_CLIENT_SECRET,
+    GOOGLE_CALLBACK_URI     = var.GOOGLE_CALLBACK_URI,
+    GOOGLE_APP_REDIRECT_URL = var.GOOGLE_APP_REDIRECT_URL
   })
   key_name = "ec2-key"
   name_tag = "epicstory-api"

@@ -9,8 +9,8 @@
     "emitDecoratorMetadata": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@epicstory/ui": ["../design-system/dist/*"]
+      "@/*": ["./src/*"]
+      // "@mateussarmento/epicstory-ui": ["../design-system/dist/*"]
     }
   }
 }

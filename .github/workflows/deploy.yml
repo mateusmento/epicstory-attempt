@@ -47,6 +47,7 @@ jobs:
             -var GOOGLE_CLIENT_ID="${{secrets.GOOGLE_CLIENT_ID}}" \
             -var GOOGLE_CLIENT_SECRET="${{secrets.GOOGLE_CLIENT_SECRET}}" \
             -var GOOGLE_REDIRECT_URI="${{secrets.GOOGLE_REDIRECT_URI}}" \
+            -var GOOGLE_APP_REDIRECT_URL="${{secrets.GOOGLE_APP_REDIRECT_URL}}" \
             -var SERVICE_NAME="epicstory-${{ inputs.deployment }}" \
             -var SERVICE_VERSION="${{ inputs.version }}" \
             -var LB_NAME_TAG="epicstory-main-lb"

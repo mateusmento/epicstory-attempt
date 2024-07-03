@@ -9,7 +9,10 @@ export class AppConfig {
   GOOGLE_CLIENT_SECRET: string;
 
   @IsNotEmpty()
-  GOOGLE_REDIRECT_URI: string;
+  GOOGLE_CALLBACK_URI: string;
+
+  @IsNotEmpty()
+  GOOGLE_APP_REDIRECT_URL: string;
 
   @IsNumber()
   @Transform(({ value }) => +value)
