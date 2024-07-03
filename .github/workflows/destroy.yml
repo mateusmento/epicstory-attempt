@@ -10,7 +10,7 @@ on:
           - load-balancer
           - network
 jobs:
-  deploy:
+  destroy:
     runs-on: ubuntu-latest
     steps:
       - name: Chekout repository
