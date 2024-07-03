@@ -7,11 +7,13 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "format": "terraform fmt --recursive; prettier --write \"./**/*.ts\" \"./**/*.js\" \"./**/*.vue\" \"./**/*.yml\" \"./**/*.json\" \"./**/.prettierrc\" \"./**/*.code-workspace\""
+    "format": "terraform fmt --recursive; prettier --write \"./**/*.ts\" \"./**/*.js\" \"./**/*.vue\" \"./**/*.yml\" \"./**/*.json\" \"./**/.prettierrc\" \"./**/*.code-workspace\"",
+    "npmrc": "npmrc-replace-env"
   },
   "devDependencies": {
     "husky": "^9.0.11",
     "lint-staged": "^15.2.5",
+    "npmrc-replace-env": "^1.1.4",
     "prettier": "^3.3.0"
   }
 }
