@@ -1,23 +1,18 @@
 import { Module } from '@nestjs/common';
-import { TypedConfigModule, dotenvLoader } from 'nest-typed-config';
-import { AppConfig } from './app.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CqrsModule } from '@nestjs/cqrs';
 import { DataSourceOptions } from 'typeorm';
-import { patch } from './lib/objects';
-import { WorkspaceModule } from './workspace/workspace.module';
+import { AppConfig } from './app.config';
 import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
+import { patch } from './lib/objects';
+import { UserModule } from './user/user.module';
+import { WorkspaceModule } from './workspace/workspace.module';
 
 export function createAppModule(
   dataSourceOptions: Partial<DataSourceOptions> = {},
 ) {
   @Module({
     imports: [
-      TypedConfigModule.forRoot({
-        isGlobal: true,
-        schema: AppConfig,
-        load: dotenvLoader({ expandVariables: true }),
-      }),
       TypeOrmModule.forRootAsync({
         inject: [AppConfig],
         useFactory: async (config: AppConfig) =>
@@ -34,8 +29,9 @@ export function createAppModule(
             dataSourceOptions,
           ),
       }),
-      CqrsModule.forRoot(),
+      CoreModule,
       AuthModule,
+      UserModule,
       WorkspaceModule,
     ],
   })

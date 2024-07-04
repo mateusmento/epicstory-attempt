@@ -27,7 +27,7 @@ async function signin(data: SigninRequest) {
     <h2>Continue your journey with Epicstory.</h2>
     <Form @submit="signin">
       <Field v-model="signinEmail" label="Email" name="email" data-testid="signin-email-input" />
-      <Field label="Password" name="password" data-testid="signin-password-input" />
+      <Field type="password" label="Password" name="password" data-testid="signin-password-input" />
       <Button variant="invitational" size="md" type="submit" data-testid="signin-submit-button">
         Sign in
       </Button>

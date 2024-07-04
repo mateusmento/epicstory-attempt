@@ -30,6 +30,21 @@ const router = createRouter({
       props: true,
       component: () => import('@/views/project/ProjectView.vue'),
     },
+    {
+      path: '/demo/home',
+      name: 'home',
+      component: () => import('@/views/HomeView.vue'),
+    },
+    {
+      path: '/demo/signup',
+      name: 'signup',
+      component: () => import('@/views/SignupView.vue'),
+    },
+    {
+      path: '/demo/signin',
+      name: 'signin',
+      component: () => import('@/views/SigninView.vue'),
+    },
   ],
 });
 

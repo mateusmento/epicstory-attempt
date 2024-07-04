@@ -19,13 +19,17 @@
   },
   "dependencies": {
     "@mateussarmento/epicstory-ui": "^0.0.1",
+    "@vee-validate/zod": "^4.13.1",
     "axios": "^1.6.8",
+    "lucide-vue-next": "^0.400.0",
     "pinia": "^2.1.7",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.8.0",
     "uniqid": "^5.4.0",
+    "vee-validate": "^4.13.1",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
