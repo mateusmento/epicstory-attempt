@@ -5,7 +5,7 @@ import type { SignupRequest, SignupResponse } from './dtos/signup.dto';
 import type { SigninRequest, SigninResponse } from './dtos/singin.dto';
 
 @injectable()
-export class AuthApi {
+export class AuthService {
   constructor(@InjectAxios() private axios: Axios) {}
 
   signup(data: SignupRequest) {
@@ -13,6 +13,6 @@ export class AuthApi {
   }
 
   signin(data: SigninRequest) {
-    return this.axios.post<SigninResponse>('/auth/token', data).then((res) => res.data);
+    return this.axios.post<SigninResponse>('/auth/tokens', data).then((res) => res.data);
   }
 }

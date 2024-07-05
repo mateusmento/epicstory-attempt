@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Workspace } from '@/types/workspace';
+import type { Workspace } from '@/domain/workspace/workspace.type';
 import DashboardAside from './DashboardAside.vue';
 import DashboardHeader from './DashboardHeader.vue';
 import DashboardMain from './DashboardMain.vue';

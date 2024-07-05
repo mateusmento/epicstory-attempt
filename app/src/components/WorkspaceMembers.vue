@@ -5,7 +5,7 @@ import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useDependency } from '@/core/dependency-injection';
-import { WorkspaceService } from '@/services/workspace.service';
+import { WorkspaceService } from '@/domain/workspace/workspace.service';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
 import { onMounted, ref } from 'vue';
@@ -17,12 +17,12 @@ const props = defineProps<{
   workspaceId: number;
 }>();
 
-const workspaceApi = useDependency(WorkspaceService);
+const workspaceService = useDependency(WorkspaceService);
 
 const members = ref<WorkspaceMember[]>([]);
 
 onMounted(async () => {
-  members.value = await workspaceApi.findMembers(props.workspaceId);
+  members.value = await workspaceService.findMembers(props.workspaceId);
 });
 
 const workspaceMemberSchema = toTypedSchema(
@@ -38,11 +38,11 @@ const projectForm = useForm({
 });
 
 const createProject = projectForm.handleSubmit(async (values) => {
-  await workspaceApi.addMember(props.workspaceId, { userId: values.user.id });
+  await workspaceService.addMember(props.workspaceId, { userId: values.user.id });
 });
 
 async function removeMember(member: WorkspaceMember) {
-  await workspaceApi.removeMember(props.workspaceId, member.id);
+  await workspaceService.removeMember(props.workspaceId, member.id);
 }
 </script>
 

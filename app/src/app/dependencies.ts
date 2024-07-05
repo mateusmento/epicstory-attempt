@@ -1,9 +1,9 @@
 import { createAxios } from '@/core/axios';
-import { IssueService } from '@/services/issue.service';
-import { ProjectService } from '@/services/project.service';
-import { WorkspaceService } from '@/services/workspace.service';
+import { IssueService } from '@/domain/issue/issue.service';
+import { WorkspaceService } from '@/domain/workspace/workspace.service';
 import { Axios } from 'axios';
 import { container as tsyringe } from 'tsyringe';
+import { ProjectService } from '@/domain/project/project.service';
 
 export async function createDependencies() {
   const { default: config } = await import('./config');

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDependency } from '@/core/dependency-injection';
-import { IssueService } from '@/services/issue.service';
-import type { Issue } from '@/types/issue';
+import { IssueService } from '@/domain/issue/issue.service';
+import type { Issue } from '@/domain/issue/issue.type';
 import { ref } from 'vue';
 import CreateIssueForm from './CreateIssueForm.vue';
 import IssueList from './IssueList.vue';

@@ -10,7 +10,7 @@ export function mockAuthAccessEndpoint() {
 }
 
 export function mockSigninEndpoint() {
-  return http.post(`${API_URL}/auth/token`, () => {
+  return http.post(`${API_URL}/auth/tokens`, () => {
     return HttpResponse.json({ token: '', user: {} });
   });
 }

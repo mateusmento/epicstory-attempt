@@ -8,9 +8,12 @@ import Button from '@/components/ui/button/Button.vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { z } from 'zod';
 import { useDependency } from '@/core/dependency-injection';
-import { AuthService } from '@/services/auth.service';
+import { AuthService } from '@/domain/auth/auth.service';
 import { useForm } from 'vee-validate';
 import { useRouter } from 'vue-router';
+import { vForm } from '@/components/form';
+import { Field } from '@/components/field';
+import { vButton } from '@mateussarmento/epicstory-ui';
 
 const router = useRouter();
 const authService = useDependency(AuthService);
@@ -49,6 +52,19 @@ const signin = form.handleSubmit(async (values) => {
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <v-form @submit="signin">
+        <Field label="Email" name="email" data-testid="signin-email-input" />
+        <Field
+          type="password"
+          label="Password"
+          name="password"
+          data-testid="signin-password-input"
+        />
+        <vButton variant="invitational" size="md" type="submit" data-testid="signin-submit-button">
+          Sign in
+        </vButton>
+      </v-form>
+
       <form class="space-y-6" @submit="signin">
         <FormField v-slot="{ componentField }" name="email" required>
           <FormItem>

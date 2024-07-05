@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useDependency } from '@/core/dependency-injection';
-import { WorkspaceService } from '@/services/workspace.service';
+import { WorkspaceService } from '@/domain/workspace/workspace.service';
 import { toTypedSchema } from '@vee-validate/zod';
 import { Form, useForm } from 'vee-validate';
 import * as z from 'zod';
@@ -16,12 +16,12 @@ const props = defineProps<{
   workspaceId: number;
 }>();
 
-const workspaceApi = useDependency(WorkspaceService);
+const workspaceService = useDependency(WorkspaceService);
 
 const projects = ref<Project[]>([]);
 
 onMounted(async () => {
-  projects.value = await workspaceApi.findProjects(props.workspaceId);
+  projects.value = await workspaceService.findProjects(props.workspaceId);
 });
 
 const projectSchema = toTypedSchema(
@@ -36,7 +36,7 @@ const projectForm = useForm({
 });
 
 const createProject = async (values: any) => {
-  await workspaceApi.createProject(props.workspaceId, values);
+  await workspaceService.createProject(props.workspaceId, values);
 };
 </script>
 

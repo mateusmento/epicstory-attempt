@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDependency } from '@/core/dependency-injection';
-import { ProjectService } from '@/services/project.service';
-import type { Project } from '@/types/project';
+import { ProjectService } from '@/domain/project/project.service';
+import type { Project } from '@/domain/project/project.type';
 import { ref } from 'vue';
 import CreateProjectForm from './CreateProjectForm.vue';
 import ProjectList from './ProjectList.vue';

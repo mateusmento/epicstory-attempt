@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDependency } from '@/core/dependency-injection';
-import { WorkspaceService } from '@/services/workspace.service';
+import { WorkspaceService } from '@/domain/workspace/workspace.service';
 import { onMounted, ref } from 'vue';
 import type { Workspace } from '@/domain/workspace/workspace.types';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
@@ -11,12 +11,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import CreateWorkspaceForm from './CreateWorkspaceForm.vue';
 import { Button } from './ui/button';
 
-const workspaceApi = useDependency(WorkspaceService);
+const workspaceService = useDependency(WorkspaceService);
 
 const workspaces = ref<Workspace[]>([]);
 
 onMounted(async () => {
-  workspaces.value = await workspaceApi.findWorkspaces();
+  workspaces.value = await workspaceService.findWorkspaces();
 });
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Workspace } from '@/types/workspace';
+import type { Workspace } from '@/domain/workspace/workspace.type';
 import CurrentWorkspace from './CurrentWorkspace.vue';
 import NavList from '../../components/NavList.vue';
 import NavLink from '../../components/NavLink.vue';

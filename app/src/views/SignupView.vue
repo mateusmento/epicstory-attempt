@@ -6,11 +6,13 @@ import { FormItem } from '@/components/ui/form';
 import { FormField } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { useDependency } from '@/core/dependency-injection';
-import { AuthService } from '@/services/auth.service';
+import { AuthService } from '@/domain/auth/auth.service';
 import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod';
 import { useRouter } from 'vue-router';
+
+const authService = useDependency(AuthService);
 
 const formSchema = toTypedSchema(
   z.object({
@@ -19,8 +21,6 @@ const formSchema = toTypedSchema(
     password: z.string().min(8).max(255),
   }),
 );
-
-const authService = useDependency(AuthService);
 
 const form = useForm({
   validationSchema: formSchema,

@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useDependency } from '@/core/dependency-injection';
-import { WorkspaceService } from '@/services/workspace.service';
+import { WorkspaceService } from '@/domain/workspace/workspace.service';
 import { reactive } from 'vue';
 
-const workspaceApi = useDependency(WorkspaceService);
+const workspaceService = useDependency(WorkspaceService);
 
 const workspaceSchema = toTypedSchema(
   z.object({
@@ -21,7 +21,7 @@ const workspace = reactive({
 });
 
 const createWorkspace = async (values: any) => {
-  await workspaceApi.create(workspace);
+  await workspaceService.create(workspace);
 };
 </script>
 

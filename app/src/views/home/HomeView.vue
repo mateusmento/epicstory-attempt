@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDependency } from '@/core/dependency-injection';
-import { WorkspaceService } from '@/services/workspace.service';
-import type { Workspace } from '@/types/workspace';
+import { WorkspaceService } from '@/domain/workspace/workspace.service';
+import type { Workspace } from '@/domain/workspace/workspace.type';
 import { ref } from 'vue';
 import CreateWorkspaceForm from './CreateWorkspaceForm.vue';
 import WorkspaceList from './WorkspaceList.vue';

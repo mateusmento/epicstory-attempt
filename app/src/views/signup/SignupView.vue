@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Button } from '@/components/button';
 import { Field } from '@/components/field';
-import { Form } from '@/components/form';
+import { vForm } from '@/components/form';
 import IconGoogle from '@/components/icons/IconGoogle.vue';
 import { useDependency } from '@/core/dependency-injection';
-import { AuthApi } from '@/domain/auth/auth.api';
+import { AuthService } from '@/domain/auth/auth.service';
 import type { SignupRequest } from '@/domain/auth/dtos/signup.dto';
 import { vButton } from '@mateussarmento/epicstory-ui';
 import { onMounted, ref } from 'vue';
@@ -12,7 +12,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-const authApi = useDependency(AuthApi);
+const authService = useDependency(AuthService);
 
 const apiUrl = ref<string>();
 
@@ -21,7 +21,7 @@ onMounted(async () => {
 });
 
 async function signup(data: SignupRequest) {
-  const user = await authApi.signup(data);
+  const user = await authService.signup(data);
   router.push({ name: 'signin', query: { email: user.email } });
 }
 </script>
@@ -74,7 +74,7 @@ async function signup(data: SignupRequest) {
           <div class="subtitle text-neutral-600">Start your journey with Epicstory.</div>
         </div>
 
-        <Form class="flex:rows-3xl" @submit="signup" data-testid="signup-form">
+        <vForm class="flex:rows-3xl" @submit="signup" data-testid="signup-form">
           <Field
             class="flex:rows-xl"
             label="Name"
@@ -119,7 +119,7 @@ async function signup(data: SignupRequest) {
             <IconGoogle class="h-8" />
             Sign up with Google
           </vButton>
-        </Form>
+        </vForm>
       </section>
     </div>
   </main>

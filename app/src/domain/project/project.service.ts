@@ -1,15 +1,15 @@
 import { InjectAxios } from '@/core/axios';
-import type { Issue } from '@/types/issue';
+import type { Project } from '@/domain/project/project.type';
 import type { Axios } from 'axios';
 import { injectable } from 'tsyringe';
 
 @injectable()
-export class IssueService {
+export class ProjectService {
   constructor(@InjectAxios() private axios: Axios) {}
 
-  createIssue(projectId: number, title: string) {
+  createProject(workspaceId: number, name: string) {
     return this.axios
-      .post<Issue>(`/projects/${projectId}/issues`, { title })
+      .post<Project>(`/workspaces/${workspaceId}/projects`, { name })
       .then((res) => res.data);
   }
 }

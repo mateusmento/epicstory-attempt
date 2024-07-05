@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { defineComponent, ref } from 'vue';
 import { Field } from '../field';
-import { Form } from '.';
+import Form from './Form.vue';
 
 describe('Field', () => {
   it('should render named property of provided form data', async () => {
@@ -18,7 +18,7 @@ describe('Field', () => {
 
     const wrapper = mount(Render, {});
 
-    const input = await wrapper.find('input');
+    const input = await wrapper.find<HTMLInputElement>('input');
     expect(input.element.value).toBe(expected);
   });
 

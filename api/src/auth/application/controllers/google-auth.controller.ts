@@ -17,7 +17,6 @@ export class GoogleAuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    console.log('redirect', req.user);
     res.redirect(this.config.GOOGLE_APP_REDIRECT_URL);
   }
 }

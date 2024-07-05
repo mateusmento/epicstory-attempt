@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Issue } from '@/types/issue';
+import type { Issue } from '@/domain/issue/issue';
 
 defineProps<{
   issues: Issue[];

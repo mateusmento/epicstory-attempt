@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Workspace } from '@/types/workspace';
+import type { Workspace } from '@/domain/workspace/workspace.type';
 
 defineProps<{
   workspace: Workspace;
